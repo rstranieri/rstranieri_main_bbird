@@ -1,4 +1,5 @@
-/* Teaser promo – structural layout only (brand styling applied in design pass) */
+/* Teaser promo – Capital Markets Day card. On desktop it overlays the hero as a
+   right-side rail (matching bat.com); on mobile it stacks as a full-width card. */
 
 .teaser-promo > div {
   display: flex;
@@ -20,6 +21,39 @@
 .teaser-promo {
   background: var(--bat-navy);
   color: var(--bat-white);
+}
+
+/* When placed in the hero section, become an overlay rail on the right. */
+.hero-carousel-container .teaser-promo {
+  position: relative;
+  z-index: 3;
+  margin: -2rem auto 0;
+  max-width: 400px;
+}
+
+@media (width >= 900px) {
+  /* Let the hero section stack the carousel + promo without clipping */
+  .hero-carousel-container .default-content-wrapper,
+  .hero-carousel-container > div {
+    position: relative;
+  }
+
+  .hero-carousel-container .teaser-promo {
+    position: absolute;
+    top: 50%;
+    right: 5vw;
+    transform: translateY(-50%);
+    width: 340px;
+    margin: 0;
+    box-shadow: 0 10px 30px rgb(14 43 99 / 35%);
+  }
+}
+
+@media (width >= 1200px) {
+  .hero-carousel-container .teaser-promo {
+    right: 6vw;
+    width: 360px;
+  }
 }
 
 .teaser-promo-content {

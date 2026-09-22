@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+/* Hero section is a positioning context for the overlaid promo rail */
+.hero-carousel-container {
+  position: relative;
+}
+
 .hero-carousel {
   position: relative;
   overflow: hidden;
@@ -19,11 +24,13 @@
   position: relative;
   flex: 0 0 100%;
   min-width: 100%;
+  min-height: 460px;
 }
 
-/* Background media */
+/* Background media fills the whole slide */
 .hero-carousel-media {
-  position: relative;
+  position: absolute;
+  inset: 0;
   line-height: 0;
 }
 
@@ -33,11 +40,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.hero-carousel-media img {
-  min-height: 320px;
-  max-height: 560px;
 }
 
 /* Darkening overlay so white text stays legible over any slide image */
@@ -67,8 +69,8 @@
   margin: 0;
   font-family: var(--heading-font-family);
   font-weight: 700;
-  font-size: clamp(1.75rem, 5vw, 2.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  line-height: 1.2;
   color: var(--bat-white);
 }
 
@@ -148,18 +150,24 @@
 }
 
 @media (width >= 600px) {
+  .hero-carousel-slide {
+    min-height: 560px;
+  }
+
   .hero-carousel-content {
     padding: 3rem;
   }
 }
 
 @media (width >= 900px) {
-  .hero-carousel-media img {
-    max-height: 640px;
+  /* Full-viewport hero like bat.com (capped so it never gets absurd on tall screens) */
+  .hero-carousel-slide {
+    min-height: min(90vh, 900px);
   }
 
   .hero-carousel-content {
     padding: 4rem 5vw;
+    max-width: 620px;
   }
 }
 
