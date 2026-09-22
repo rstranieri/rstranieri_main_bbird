@@ -1,4 +1,8 @@
-/* Topic cards – structural layout only (brand styling applied in design pass) */
+/* Block: cards-topic — full-bleed portrait image tiles with overlaid text
+   Design matched to bat.com "Our transformation" / "Latest results" teasers.
+   Values extracted from source computed styles (tile 400x533 ≈ 3:4;
+   image object-fit:cover filling the tile; category tag pinned top-left;
+   heading/description/CTA bottom-aligned over a navy scrim, all in white). */
 
 .cards-topic > ul {
   list-style: none;
@@ -6,25 +10,26 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 24px;
 }
 
+/* Each card is a positioned, clipped portrait tile */
 .cards-topic > ul > li {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
-  background: var(--bat-white);
-  box-shadow: 0 1px 4px rgb(14 43 99 / 12%);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  isolation: isolate;
+  background: var(--bat-navy);
 }
 
-.cards-topic > ul > li:hover {
-  box-shadow: 0 12px 28px rgb(14 43 99 / 18%);
-  transform: translateY(-4px);
-}
-
+/* Image fills the entire tile (behind the in-flow content) */
 .cards-topic-image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   line-height: 0;
 }
 
@@ -32,16 +37,37 @@
 .cards-topic-image img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
 }
 
+/* Bottom-aligned overlay content over a dark navy gradient scrim */
 .cards-topic-body {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  padding: 1.5rem;
+  gap: 12px;
+  padding: 72px 28px 30px;
+  background: linear-gradient(
+    to top,
+    rgb(14 43 99 / 92%) 0%,
+    rgb(14 43 99 / 72%) 45%,
+    rgb(14 43 99 / 0%) 100%
+  );
+  color: var(--bat-white);
+}
+
+/* Category eyebrow pinned to the top-left of the whole tile */
+.cards-topic-tag {
+  position: absolute;
+  top: 18px;
+  left: 28px;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--bat-white);
 }
 
 .cards-topic-body h1,
@@ -51,51 +77,89 @@
   margin: 0;
   font-family: var(--heading-font-family);
   font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1.25;
-  color: var(--bat-navy);
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--bat-white);
 }
 
 .cards-topic-body p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.5;
-  color: var(--bat-navy);
+  color: var(--bat-white);
 }
 
-.cards-topic-tag {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--bat-blue);
+/* CTA link — plain white text with trailing arrow.
+   Reset EDS button auto-decoration (a.button / .button-container). */
+.cards-topic-body p.button-container {
+  margin: 0;
 }
 
-.cards-topic-body a {
+.cards-topic-body a,
+.cards-topic-body a.button:any-link {
+  display: inline-flex;
+  align-items: center;
   align-self: flex-start;
-  color: var(--bat-navy);
-  font-weight: 700;
-  font-size: 0.85rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--bat-white);
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: none;
   text-decoration: none;
+  text-align: left;
+  white-space: normal;
+  overflow: visible;
 }
 
-.cards-topic-body a::after {
+.cards-topic-body a::after,
+.cards-topic-body a.button:any-link::after {
   content: ' ›';
+  position: static;
+  inset: auto;
+  background: none;
+  transform: none;
+  margin-left: 6px;
+  font-weight: 400;
 }
 
-.cards-topic-body a:hover {
-  color: var(--bat-blue);
+.cards-topic-body a:hover,
+.cards-topic-body a.button:any-link:hover {
+  color: var(--bat-white);
+  background: none;
+  box-shadow: none;
+  transform: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
+/* Tablet: two tiles per row */
 @media (width >= 600px) {
   .cards-topic > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Desktop: three tiles per row */
 @media (width >= 900px) {
   .cards-topic > ul {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 32px;
+  }
+
+  .cards-topic-body {
+    padding: 80px 40px 30px;
+  }
+
+  .cards-topic-tag {
+    left: 40px;
   }
 }
