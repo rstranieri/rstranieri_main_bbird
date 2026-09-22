@@ -12,12 +12,16 @@
       "cards-topic",
       "cards-news",
       "cards-press",
+      "cards-drop",
+      "cards-product",
       "columns",
       "columns-newsroom",
       "embed",
       "embed-video",
       "form",
       "fragment",
+      "hero-video",
+      "teaser-transaction",
       "hero",
       "hero-carousel",
       "image",
@@ -34,6 +38,12 @@
     ]
   },
   {
+    "id": "cards-drop",
+    "components": [
+      "cards-drop-item"
+    ]
+  },
+  {
     "id": "cards-news",
     "components": [
       "cards-news-item"
@@ -43,6 +53,12 @@
     "id": "cards-press",
     "components": [
       "cards-press-item"
+    ]
+  },
+  {
+    "id": "cards-product",
+    "components": [
+      "cards-product-item"
     ]
   },
   {
@@ -103,6 +119,12 @@
     "id": "tabs-spotlight",
     "components": [
       "tabs-spotlight-item"
+    ]
+  },
+  {
+    "id": "teaser-transaction",
+    "components": [
+      "teaser-transaction-item"
     ]
   }
 ]

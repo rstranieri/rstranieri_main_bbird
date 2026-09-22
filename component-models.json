@@ -149,6 +149,36 @@
     ]
   },
   {
+    "id": "cards-drop",
+    "fields": []
+  },
+  {
+    "id": "cards-drop-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Linked title"
+      }
+    ]
+  },
+  {
     "id": "cards-news",
     "fields": []
   },
@@ -191,6 +221,36 @@
         "name": "text",
         "label": "Text",
         "description": "Tag/date, heading and description"
+      }
+    ]
+  },
+  {
+    "id": "cards-product",
+    "fields": []
+  },
+  {
+    "id": "cards-product-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Product Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Product/flavor name and optional link"
       }
     ]
   },
@@ -454,6 +514,38 @@
     ]
   },
   {
+    "id": "hero-video",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Background Video (.mp4 URL)"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Poster / Fallback Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Headline and a link for the CTA"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {
@@ -678,6 +770,36 @@
         "name": "text",
         "label": "Text",
         "description": "Eyebrow, heading, body text and a link for the CTA"
+      }
+    ]
+  },
+  {
+    "id": "teaser-transaction",
+    "fields": []
+  },
+  {
+    "id": "teaser-transaction-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Heading, text and a CTA link"
       }
     ]
   },

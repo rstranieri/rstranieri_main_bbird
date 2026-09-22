@@ -1,0 +1,10 @@
+{
+  "variantName": "hero-video",
+  "baseBlock": "hero",
+  "visualCharacteristics": "Full-bleed background video (image fallback) with a large overlaid headline and a call-to-action, bottom-left aligned over a legibility scrim.",
+  "contentPattern": "Single row: media cell (link to .mp4 or an image) + content cell (heading + CTA link).",
+  "usage": "Homepage top hero with autoplaying background video.",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["hero-video"]
+}

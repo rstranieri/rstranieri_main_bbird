@@ -1,0 +1,65 @@
+/* Drop cards – horizontal row of article/reward image cards with linked titles */
+
+.cards-drop > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.cards-drop > ul > li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cards-drop-image {
+  line-height: 0;
+}
+
+.cards-drop-image picture,
+.cards-drop-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cards-drop-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cards-drop-body h1,
+.cards-drop-body h2,
+.cards-drop-body h3,
+.cards-drop-body h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.cards-drop-body p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@media (width >= 600px) {
+  .cards-drop > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards-drop > ul {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+  }
+}

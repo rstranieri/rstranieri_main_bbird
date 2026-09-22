@@ -1,0 +1,86 @@
+/* Video hero – full-bleed background video/image with overlaid headline + CTA */
+
+.hero-video-container .hero-video-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-video {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+
+  /* Brand fallback when no background media is available */
+  background: linear-gradient(120deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+}
+
+.hero-video-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  line-height: 0;
+}
+
+.hero-video-media video,
+.hero-video-media picture,
+.hero-video-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Legibility scrim */
+.hero-video-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 15%) 45%, rgb(0 0 0 / 5%) 100%);
+}
+
+.hero-video-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 1rem;
+  min-height: inherit;
+  padding: 2rem 1.5rem 3rem;
+  color: #fff;
+}
+
+.hero-video-content h1,
+.hero-video-content h2 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.hero-video-content p {
+  margin: 0;
+}
+
+@media (width >= 600px) {
+  .hero-video {
+    min-height: 560px;
+  }
+
+  .hero-video-content {
+    padding: 3rem;
+  }
+}
+
+@media (width >= 900px) {
+  .hero-video {
+    min-height: min(80vh, 760px);
+  }
+
+  .hero-video-content {
+    padding: 4rem 5vw;
+  }
+}
