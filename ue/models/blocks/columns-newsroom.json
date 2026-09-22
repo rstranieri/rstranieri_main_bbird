@@ -1,0 +1,53 @@
+{
+  "definitions": [
+    {
+      "title": "Newsroom Columns",
+      "id": "columns-newsroom",
+      "model": "columns-newsroom",
+      "filter": "columns-newsroom",
+      "plugins": {
+        "da": {
+          "name": "columns-newsroom",
+          "rows": 1,
+          "columns": 2,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Newsroom Columns Row",
+      "id": "columns-newsroom-row",
+      "model": "columns-newsroom-row",
+      "filter": "columns-newsroom-row",
+      "plugins": {
+        "da": {
+          "name": "columns-newsroom-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Newsroom Columns Cell",
+      "id": "columns-newsroom-cell",
+      "model": "columns-newsroom-cell",
+      "filter": "columns-newsroom-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-newsroom",
+      "fields": []
+    }
+  ],
+  "filters": [
+    { "id": "columns-newsroom", "components": ["columns-newsroom-row"] },
+    { "id": "columns-newsroom-row", "components": [] },
+    { "id": "columns-newsroom-cell", "components": ["text", "image", "cards-news", "cards-press"] }
+  ]
+}

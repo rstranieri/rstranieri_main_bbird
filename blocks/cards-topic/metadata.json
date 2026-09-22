@@ -1,0 +1,10 @@
+{
+  "variantName": "cards-topic",
+  "baseBlock": "cards",
+  "visualCharacteristics": "Responsive grid (up to 3-up) of image cards, each with a category eyebrow tag, image, heading, short description and a single text link.",
+  "contentPattern": "One row per card: image cell + content cell (eyebrow tag, heading, description, link).",
+  "usage": "Topic/feature card grids (Our transformation; Latest results, reports and research).",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["cards-topic"]
+}

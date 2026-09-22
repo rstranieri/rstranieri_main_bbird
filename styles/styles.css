@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -44,17 +46,17 @@
   /* color scheme */
   color-scheme: light dark;
 
-  /* heritage palette */
-  --color-rust: #a14f2b;
-  --color-gold: #c5a059;
-  --color-parchment: #f5f2ed;
-  --color-ink: #1a1a1a;
+  /* BAT brand palette (was heritage rust/gold; remapped to BAT navy/blue) */
+  --color-rust: #004f9f;
+  --color-gold: #1e6fc4;
+  --color-parchment: #fff;
+  --color-ink: #0e2b63;
 
-  /* heritage dark palette */
-  --color-obsidian: #060d0d;
-  --color-card-dark: #162121;
-  --color-rust-bright: #d16a3e;
-  --color-muted: #8b9a9a;
+  /* BAT dark palette */
+  --color-obsidian: #0e2b63;
+  --color-card-dark: #12275a;
+  --color-rust-bright: #1e6fc4;
+  --color-muted: #c8d2e2;
 
   /* color tokens – grays and palette */
   --color-gray-100: #f1f1f1;
@@ -120,7 +122,9 @@
   --font-family-serif: "EB Garamond", georgia, serif;
   --font-family-mono: "JetBrains Mono", "Courier New", monospace;
   --body-font-family: var(--font-family);
-  --heading-font-family: var(--font-family-serif);
+
+  /* BAT uses a geometric sans (Aeroport) for headings — map to the bundled sans, not the serif */
+  --heading-font-family: var(--font-family);
 
   /* heading sizes */
   --heading-font-size-xxl: 32.44px;
@@ -606,6 +610,27 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: var(--section-block-space) 0;
+}
+
+/* BAT grey feature section (In the spotlight; Latest results) */
+main .section.grey {
+  background-color: var(--bat-grey);
+  margin: 0;
+  padding: var(--space-3xl) 0;
+}
+
+/* BAT dark navy section (Latest stories / press releases) */
+main .section.dark {
+  background-color: var(--bat-navy);
+  color: var(--bat-white);
+  margin: 0;
+  padding: var(--space-3xl) 0;
+}
+
+main .section.dark :is(h1, h2, h3, h4, h5, h6),
+main .section.dark p,
+main .section.dark a {
+  color: var(--bat-white);
 }
 
 /* section-metadata style=divider: content-width (grid) border-bottom */

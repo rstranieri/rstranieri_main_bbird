@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "projectType": "xwalk"
+  },
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://www.bat.com/"
+      ],
+      "representativeUrl": "https://www.bat.com/",
+      "description": "",
+      "urlPattern": "/",
+      "blocks": [
+        {
+          "name": "hero-carousel",
+          "instances": [
+            ".corp-hero-carousel.carousel"
+          ]
+        },
+        {
+          "name": "teaser-promo",
+          "instances": [
+            ".corp-hero-carousel__experience-fragment"
+          ]
+        },
+        {
+          "name": "cards-topic",
+          "instances": [
+            ".columncontrol__base.columncontrol__grid--lt4"
+          ]
+        },
+        {
+          "name": "teaser-stage",
+          "instances": [
+            ".batcom-teaser.batcom-teaser-corp-stage"
+          ]
+        },
+        {
+          "name": "columns-newsroom",
+          "instances": [
+            ".batcom-columncontrol.columncontrol--home.columncontrol--large-height"
+          ]
+        },
+        {
+          "name": "cards-news",
+          "instances": [
+            ".batcom-list.batcom-layout--twoColumns.batcom-list--news-and-stories"
+          ]
+        },
+        {
+          "name": "cards-press",
+          "instances": [
+            ".batcom-list.batcom-layout--oneColumn.batcom-list--news-and-stories"
+          ]
+        },
+        {
+          "name": "tabs-spotlight",
+          "instances": [
+            ".batcom-tabs.tabs.panelcontainer"
+          ]
+        },
+        {
+          "name": "embed-video",
+          "instances": [
+            ".batcom-video"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc1c2c2",
+          "name": "Hero carousel",
+          "selector": [
+            ".batcom-container.batcom-container--full-page-width.batcom-container--noSpacing"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-carousel",
+            "teaser-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc1c2c3",
+          "name": "Our transformation",
+          "selector": [
+            ".batcom-container.batcom-space--smallBottom.aem-GridColumn--laptop--none.aem-GridColumn--offset--laptop--0"
+          ],
+          "style": "light",
+          "blocks": [
+            "cards-topic",
+            "teaser-stage"
+          ],
+          "defaultContent": [
+            ".batcom-container.batcom-space--smallBottom.aem-GridColumn--laptop--none .batcom-text.text.batcom-space--smallBottom"
+          ]
+        },
+        {
+          "id": "rc1c2c5",
+          "name": "Latest stories and features / Latest press releases",
+          "selector": [
+            ".batcom-columncontrol.columncontrol--home.columncontrol--large-height"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns-newsroom",
+            "cards-news",
+            "cards-press"
+          ],
+          "defaultContent": [
+            ".batcom-columncontrol--home .batcom-button.batcom-button--center"
+          ]
+        },
+        {
+          "id": "rc1c2c6",
+          "name": "In the spotlight",
+          "selector": [
+            ".batcom-container.batcom-container--background-full-page-width.batcom-container--primary-light"
+          ],
+          "style": "grey",
+          "blocks": [
+            "tabs-spotlight",
+            "embed-video"
+          ],
+          "defaultContent": [
+            ".batcom-container--primary-light .batcom-text.text.batcom-container.batcom-space--noBottomSpace"
+          ]
+        },
+        {
+          "id": "rc1c2c7",
+          "name": "Latest results, reports and research",
+          "selector": [
+            ".batcom-container.container.responsivegrid.batcom-space--largeBottom.aem-GridColumn--default--12:nth-of-type(7)"
+          ],
+          "style": "grey",
+          "blocks": [
+            "cards-topic"
+          ],
+          "defaultContent": [
+            ".batcom-container.batcom-space--largeBottom.aem-GridColumn--default--12:nth-of-type(7) .batcom-text.text.batcom-space--smallBottom"
+          ]
+        }
+      ]
+    }
+  ]
+}

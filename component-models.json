@@ -149,6 +149,82 @@
     ]
   },
   {
+    "id": "cards-news",
+    "fields": []
+  },
+  {
+    "id": "cards-news-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Tag/date, heading and description"
+      }
+    ]
+  },
+  {
+    "id": "cards-press",
+    "fields": []
+  },
+  {
+    "id": "cards-press-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Tag/date, heading and description"
+      }
+    ]
+  },
+  {
+    "id": "cards-topic",
+    "fields": []
+  },
+  {
+    "id": "cards-topic-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Category tag, heading, description and a link"
+      }
+    ]
+  },
+  {
     "id": "cards",
     "fields": [
       {
@@ -195,6 +271,10 @@
     ]
   },
   {
+    "id": "columns-newsroom",
+    "fields": []
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -207,6 +287,32 @@
           "numberMin": 1,
           "numberMax": 6
         }
+      }
+    ]
+  },
+  {
+    "id": "embed-video",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Poster Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Overlay title and a link to the video"
       }
     ]
   },
@@ -301,6 +407,49 @@
         "name": "url",
         "label": "Fragment URL",
         "required": true
+      }
+    ]
+  },
+  {
+    "id": "hero-carousel",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Slide Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text"
       }
     ]
   },
@@ -448,6 +597,27 @@
     "fields": []
   },
   {
+    "id": "tabs-spotlight",
+    "fields": []
+  },
+  {
+    "id": "tabs-spotlight-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Tab Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content",
+        "label": "Panel Content"
+      }
+    ]
+  },
+  {
     "id": "tabs",
     "fields": [
       {
@@ -456,6 +626,58 @@
         "label": "Style",
         "valueType": "string",
         "description": "Optional style variant for the tabs block"
+      }
+    ]
+  },
+  {
+    "id": "teaser-promo",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Eyebrow label, heading/date and a link for the CTA"
+      }
+    ]
+  },
+  {
+    "id": "teaser-stage",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Eyebrow, heading, body text and a link for the CTA"
       }
     ]
   },

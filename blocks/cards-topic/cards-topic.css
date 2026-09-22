@@ -1,0 +1,101 @@
+/* Topic cards – structural layout only (brand styling applied in design pass) */
+
+.cards-topic > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.cards-topic > ul > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bat-white);
+  box-shadow: 0 1px 4px rgb(14 43 99 / 12%);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.cards-topic > ul > li:hover {
+  box-shadow: 0 12px 28px rgb(14 43 99 / 18%);
+  transform: translateY(-4px);
+}
+
+.cards-topic-image {
+  line-height: 0;
+}
+
+.cards-topic-image picture,
+.cards-topic-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.cards-topic-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.5rem;
+}
+
+.cards-topic-body h1,
+.cards-topic-body h2,
+.cards-topic-body h3,
+.cards-topic-body h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--bat-navy);
+}
+
+.cards-topic-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--bat-navy);
+}
+
+.cards-topic-tag {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--bat-blue);
+}
+
+.cards-topic-body a {
+  align-self: flex-start;
+  color: var(--bat-navy);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.cards-topic-body a::after {
+  content: ' ›';
+}
+
+.cards-topic-body a:hover {
+  color: var(--bat-blue);
+}
+
+@media (width >= 600px) {
+  .cards-topic > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards-topic > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}

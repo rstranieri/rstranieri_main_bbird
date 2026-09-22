@@ -1,0 +1,106 @@
+/* Teaser stage – structural layout only (brand styling applied in design pass) */
+
+.teaser-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.teaser-stage > div {
+  display: grid;
+}
+
+.teaser-stage-media {
+  grid-area: 1 / 1;
+  line-height: 0;
+}
+
+.teaser-stage-media picture,
+.teaser-stage-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teaser-stage-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(14 43 99 / 82%) 0%, rgb(14 43 99 / 45%) 55%, rgb(14 43 99 / 12%) 100%);
+}
+
+.teaser-stage-content {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  max-width: 640px;
+  color: var(--bat-white);
+}
+
+.teaser-stage-content h1,
+.teaser-stage-content h2,
+.teaser-stage-content h3,
+.teaser-stage-content h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  line-height: 1.15;
+  color: var(--bat-white);
+}
+
+.teaser-stage-content p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--bat-white);
+}
+
+.teaser-stage-content a {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  background: var(--bat-white);
+  color: var(--bat-navy);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.teaser-stage-content a:hover {
+  background: var(--bat-blue);
+  color: var(--bat-white);
+}
+
+.teaser-stage-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+@media (width >= 600px) {
+  .teaser-stage-content {
+    padding: 3rem;
+  }
+}
+
+@media (width >= 900px) {
+  .teaser-stage-content {
+    padding: 4rem 5vw;
+    min-height: 420px;
+  }
+}
+
+@media (width >= 1200px) {
+  .teaser-stage-content {
+    padding: 5rem 6vw;
+  }
+}

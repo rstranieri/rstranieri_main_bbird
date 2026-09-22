@@ -9,25 +9,71 @@
     "id": "section",
     "components": [
       "cards",
+      "cards-topic",
+      "cards-news",
+      "cards-press",
       "columns",
+      "columns-newsroom",
       "embed",
+      "embed-video",
       "form",
       "fragment",
       "hero",
+      "hero-carousel",
       "image",
       "journey-map",
       "related-articles",
       "search",
       "social-share",
       "tabs",
+      "tabs-spotlight",
       "teaser",
+      "teaser-promo",
+      "teaser-stage",
       "text"
+    ]
+  },
+  {
+    "id": "cards-news",
+    "components": [
+      "cards-news-item"
+    ]
+  },
+  {
+    "id": "cards-press",
+    "components": [
+      "cards-press-item"
+    ]
+  },
+  {
+    "id": "cards-topic",
+    "components": [
+      "cards-topic-item"
     ]
   },
   {
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "columns-newsroom",
+    "components": [
+      "columns-newsroom-row"
+    ]
+  },
+  {
+    "id": "columns-newsroom-row",
+    "components": []
+  },
+  {
+    "id": "columns-newsroom-cell",
+    "components": [
+      "text",
+      "image",
+      "cards-news",
+      "cards-press"
     ]
   },
   {
@@ -51,6 +97,12 @@
     "id": "journey-map",
     "components": [
       "journey-map-step"
+    ]
+  },
+  {
+    "id": "tabs-spotlight",
+    "components": [
+      "tabs-spotlight-item"
     ]
   }
 ]

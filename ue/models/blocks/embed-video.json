@@ -1,0 +1,50 @@
+{
+  "definitions": [
+    {
+      "title": "Video Embed",
+      "id": "embed-video",
+      "model": "embed-video",
+      "plugins": {
+        "da": {
+          "name": "embed-video",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            { "name": "image", "selector": "div>div:nth-child(1)>picture>img[src]" },
+            { "name": "imageAlt", "selector": "div>div:nth-child(1)>picture>img[alt]" },
+            { "name": "text", "selector": "div>div:nth-child(2)" }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "embed-video",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Poster Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt Text",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "description": "Overlay title and a link to the video"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

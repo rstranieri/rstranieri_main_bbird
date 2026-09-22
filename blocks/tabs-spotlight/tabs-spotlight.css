@@ -1,0 +1,55 @@
+/* Spotlight tabs – structural layout only (brand styling applied in design pass) */
+
+.tabs-spotlight-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  border-bottom: 1px solid var(--bat-grey-border);
+  margin-bottom: 2rem;
+}
+
+.tabs-spotlight-tab {
+  padding: 0.85rem 0.25rem;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bat-navy);
+  opacity: 0.6;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.tabs-spotlight-tab:hover {
+  opacity: 1;
+}
+
+.tabs-spotlight-tab.is-active {
+  border-bottom-color: var(--bat-navy);
+  opacity: 1;
+}
+
+.tabs-spotlight-panel h1,
+.tabs-spotlight-panel h2,
+.tabs-spotlight-panel h3 {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  color: var(--bat-navy);
+}
+
+.tabs-spotlight-panel a {
+  color: var(--bat-navy);
+  font-weight: 700;
+}
+
+.tabs-spotlight-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs-spotlight-panel[aria-hidden='false'] {
+  display: block;
+}

@@ -1,0 +1,74 @@
+/* Newsroom columns – structural layout only (brand styling applied in design pass) */
+
+.columns-newsroom > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.columns-newsroom-col {
+  min-width: 0;
+}
+
+.columns-newsroom-col > :first-child {
+  margin-top: 0;
+}
+
+/* Section heading ("Latest stories and features" / "Latest press releases") */
+.columns-newsroom-col h2 {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem;
+  color: var(--bat-white);
+}
+
+/* Story / press-release item headings link */
+.columns-newsroom-col h4 {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 0.35rem 0;
+}
+
+.columns-newsroom-col h4 a {
+  color: var(--bat-white);
+  text-decoration: none;
+}
+
+.columns-newsroom-col h4 a:hover {
+  text-decoration: underline;
+}
+
+/* Meta line (category | date) */
+.columns-newsroom-col p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0.35rem 0 1.25rem;
+  color: rgb(255 255 255 / 85%);
+}
+
+/* Divider between items */
+.columns-newsroom-col :is(h4) {
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+}
+
+.columns-newsroom-col h2 + p {
+  border-top: 0;
+  padding-top: 0;
+}
+
+@media (width >= 900px) {
+  .columns-newsroom-2-cols > div {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 4rem;
+  }
+
+  /* Vertical rule between the stories and press-release columns */
+  .columns-newsroom-2-cols > div > .columns-newsroom-col:last-child {
+    padding-left: 4rem;
+    border-left: 1px solid rgb(255 255 255 / 20%);
+  }
+}

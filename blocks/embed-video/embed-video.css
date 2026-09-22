@@ -1,0 +1,70 @@
+/* Video embed – structural layout only (brand styling applied in design pass) */
+
+.embed-video-poster {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.embed-video-poster picture,
+.embed-video-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.embed-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  line-height: normal;
+  pointer-events: none;
+}
+
+.embed-video-overlay :is(h1, h2, h3, h4, p) {
+  margin: 0;
+}
+
+.embed-video-overlay :is(h1, h2, h3) {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  color: var(--bat-white);
+}
+
+.embed-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 72px;
+  height: 72px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgb(14 43 99 / 80%);
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.embed-video-play:hover {
+  background: var(--bat-blue);
+}
+
+.embed-video-play::before {
+  content: '▶';
+  font-size: 1.5rem;
+}
+
+.embed-video-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}

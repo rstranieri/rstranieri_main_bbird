@@ -1,0 +1,68 @@
+/* Teaser promo – structural layout only (brand styling applied in design pass) */
+
+.teaser-promo > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.teaser-promo-media {
+  line-height: 0;
+}
+
+.teaser-promo-media picture,
+.teaser-promo-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.teaser-promo {
+  background: var(--bat-navy);
+  color: var(--bat-white);
+}
+
+.teaser-promo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  color: var(--bat-white);
+}
+
+.teaser-promo-content h1,
+.teaser-promo-content h2,
+.teaser-promo-content h3,
+.teaser-promo-content h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  color: var(--bat-white);
+}
+
+.teaser-promo-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--bat-white);
+}
+
+.teaser-promo-content a {
+  color: var(--bat-white);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.teaser-promo-content a:hover {
+  text-decoration: underline;
+}
+
+.teaser-promo-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--bat-white);
+  opacity: 0.85;
+}

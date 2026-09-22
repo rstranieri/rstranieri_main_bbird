@@ -1,0 +1,72 @@
+{
+  "definitions": [
+    {
+      "title": "Topic Cards",
+      "id": "cards-topic",
+      "model": "cards-topic",
+      "filter": "cards-topic",
+      "plugins": {
+        "da": {
+          "name": "cards-topic",
+          "rows": 1,
+          "columns": 1
+        }
+      }
+    },
+    {
+      "title": "Topic Card Item",
+      "id": "cards-topic-item",
+      "model": "cards-topic-item",
+      "plugins": {
+        "da": {
+          "name": "cards-topic-item",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            { "name": "image", "selector": "div:nth-child(1)>picture>img[src]" },
+            { "name": "imageAlt", "selector": "div:nth-child(1)>picture>img[alt]" },
+            { "name": "text", "selector": "div:nth-child(2)" }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards-topic",
+      "fields": []
+    },
+    {
+      "id": "cards-topic-item",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt Text",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "description": "Category tag, heading, description and a link"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-topic",
+      "components": ["cards-topic-item"]
+    }
+  ]
+}

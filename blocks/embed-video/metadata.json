@@ -1,0 +1,10 @@
+{
+  "variantName": "embed-video",
+  "baseBlock": "embed",
+  "visualCharacteristics": "Poster image with a centered play button and an overlaid title. Clicking plays the video inline (native video for direct/HLS files, iframe otherwise).",
+  "contentPattern": "Single row: poster image cell + content cell (overlay title + a link to the video).",
+  "usage": "Video teasers inside the In the spotlight tabs.",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["embed-video"]
+}

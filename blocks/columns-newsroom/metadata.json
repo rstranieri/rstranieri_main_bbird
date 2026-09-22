@@ -1,0 +1,10 @@
+{
+  "variantName": "columns-newsroom",
+  "baseBlock": "columns",
+  "visualCharacteristics": "Two-column split layout: a wider left column and a narrower right column, used to place Latest stories beside Latest press releases.",
+  "contentPattern": "Single row with two column cells (left content + right content).",
+  "usage": "Newsroom section combining stories and press releases side by side.",
+  "canonicalModel": "columns",
+  "options": [],
+  "memberVariantIds": ["columns-newsroom"]
+}

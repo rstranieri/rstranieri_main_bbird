@@ -1,0 +1,10 @@
+{
+  "variantName": "teaser-promo",
+  "baseBlock": "teaser",
+  "visualCharacteristics": "Compact promotional card with an eyebrow label, image, heading/date text and a single call-to-action link. Sits overlaid on the hero.",
+  "contentPattern": "Single row: image cell + content cell (eyebrow, heading/date, link).",
+  "usage": "Time-bound promo (e.g. Capital Markets Day) layered on the hero.",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["teaser-promo"]
+}
