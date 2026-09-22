@@ -60,6 +60,115 @@
       "id": "blocks",
       "components": [
         {
+          "title": "News Cards",
+          "id": "cards-news",
+          "model": "cards-news",
+          "filter": "cards-news",
+          "plugins": {
+            "da": {
+              "name": "cards-news",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "News Card Item",
+          "id": "cards-news-item",
+          "model": "cards-news-item",
+          "plugins": {
+            "da": {
+              "name": "cards-news-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Press Cards",
+          "id": "cards-press",
+          "model": "cards-press",
+          "filter": "cards-press",
+          "plugins": {
+            "da": {
+              "name": "cards-press",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Press Card Item",
+          "id": "cards-press-item",
+          "model": "cards-press-item",
+          "plugins": {
+            "da": {
+              "name": "cards-press-item",
+              "rows": 1,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(1)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Topic Cards",
+          "id": "cards-topic",
+          "model": "cards-topic",
+          "filter": "cards-topic",
+          "plugins": {
+            "da": {
+              "name": "cards-topic",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Topic Card Item",
+          "id": "cards-topic-item",
+          "model": "cards-topic-item",
+          "plugins": {
+            "da": {
+              "name": "cards-topic-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "model": "cards",
@@ -99,6 +208,44 @@
           }
         },
         {
+          "title": "Newsroom Columns",
+          "id": "columns-newsroom",
+          "model": "columns-newsroom",
+          "filter": "columns-newsroom",
+          "plugins": {
+            "da": {
+              "name": "columns-newsroom",
+              "rows": 1,
+              "columns": 2,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Newsroom Columns Row",
+          "id": "columns-newsroom-row",
+          "model": "columns-newsroom-row",
+          "filter": "columns-newsroom-row",
+          "plugins": {
+            "da": {
+              "name": "columns-newsroom-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Newsroom Columns Cell",
+          "id": "columns-newsroom-cell",
+          "model": "columns-newsroom-cell",
+          "filter": "columns-newsroom-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "model": "columns",
@@ -133,6 +280,32 @@
             "da": {
               "unsafeHTML": "<div></div>",
               "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Video Embed",
+          "id": "embed-video",
+          "model": "embed-video",
+          "plugins": {
+            "da": {
+              "name": "embed-video",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div>div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div>div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div>div:nth-child(2)"
+                }
+              ]
             }
           }
         },
@@ -205,6 +378,32 @@
                 {
                   "name": "urlText",
                   "selector": "div>div>p>a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero Carousel",
+          "id": "hero-carousel",
+          "model": "hero-carousel",
+          "plugins": {
+            "da": {
+              "name": "hero-carousel",
+              "rows": 1,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div>picture>img[alt]"
+                },
+                {
+                  "name": "heading",
+                  "selector": "div:nth-child(1)>div>h1"
                 }
               ]
             }
@@ -306,6 +505,41 @@
           }
         },
         {
+          "title": "Spotlight Tabs",
+          "id": "tabs-spotlight",
+          "model": "tabs-spotlight",
+          "filter": "tabs-spotlight",
+          "plugins": {
+            "da": {
+              "name": "tabs-spotlight",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Spotlight Tab Item",
+          "id": "tabs-spotlight-item",
+          "model": "tabs-spotlight-item",
+          "plugins": {
+            "da": {
+              "name": "tabs-spotlight-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "label",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "content",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Tabs",
           "id": "tabs",
           "model": "tabs",
@@ -314,6 +548,58 @@
               "name": "tabs",
               "rows": 1,
               "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Teaser Promo",
+          "id": "teaser-promo",
+          "model": "teaser-promo",
+          "plugins": {
+            "da": {
+              "name": "teaser-promo",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div>div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div>div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div>div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Teaser Stage",
+          "id": "teaser-stage",
+          "model": "teaser-stage",
+          "plugins": {
+            "da": {
+              "name": "teaser-stage",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div>div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div>div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div>div:nth-child(2)"
+                }
+              ]
             }
           }
         },

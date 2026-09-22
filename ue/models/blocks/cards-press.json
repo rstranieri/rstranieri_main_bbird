@@ -1,0 +1,56 @@
+{
+  "definitions": [
+    {
+      "title": "Press Cards",
+      "id": "cards-press",
+      "model": "cards-press",
+      "filter": "cards-press",
+      "plugins": {
+        "da": {
+          "name": "cards-press",
+          "rows": 1,
+          "columns": 1
+        }
+      }
+    },
+    {
+      "title": "Press Card Item",
+      "id": "cards-press-item",
+      "model": "cards-press-item",
+      "plugins": {
+        "da": {
+          "name": "cards-press-item",
+          "rows": 1,
+          "columns": 1,
+          "fields": [
+            { "name": "text", "selector": "div:nth-child(1)" }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards-press",
+      "fields": []
+    },
+    {
+      "id": "cards-press-item",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "description": "Tag/date, heading and description"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-press",
+      "components": ["cards-press-item"]
+    }
+  ]
+}

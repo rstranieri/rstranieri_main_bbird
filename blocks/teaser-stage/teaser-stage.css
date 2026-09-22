@@ -1,0 +1,160 @@
+/* Teaser stage – full-width band: background photo with a navy scrim on the
+   left and overlaid white eyebrow, heading, body and outlined CTA.
+   Values matched to the bat.com "corp-stage" teaser computed styles. */
+
+.teaser-stage {
+  position: relative;
+  overflow: hidden;
+  min-height: 22rem;
+}
+
+.teaser-stage > div {
+  display: grid;
+}
+
+.teaser-stage-media {
+  grid-area: 1 / 1;
+  line-height: 0;
+}
+
+.teaser-stage-media picture,
+.teaser-stage-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Navy scrim: fully opaque navy at the left fading to transparent toward the
+   right (~75% across), matching the source linear-gradient for legibility. */
+.teaser-stage-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--bat-navy) 0%, rgb(14 43 99 / 0%) 78%);
+}
+
+.teaser-stage-content {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  padding: 2rem 1.5rem;
+  color: var(--bat-white);
+}
+
+/* Heading — white, 32px / 40px, regular weight (source uses a light geometric
+   sans). Kill the global h2 accent bar that plain sections add via ::after. */
+.teaser-stage-content h1,
+.teaser-stage-content h2,
+.teaser-stage-content h3,
+.teaser-stage-content h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: normal;
+  color: var(--bat-white);
+}
+
+.teaser-stage-content :is(h1, h2, h3, h4)::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Body copy — white, 14px, ~1.4 line-height, constrained width like source. */
+.teaser-stage-content p {
+  margin: 0.75rem 0 0;
+  max-width: 22rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--bat-white);
+}
+
+/* Eyebrow ("People") — small white label above the heading, mixed-case,
+   no letter-spacing, per source computed styles. */
+.teaser-stage-content p.teaser-stage-eyebrow {
+  margin: 0 0 0.5rem;
+  max-width: none;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* CTA — transparent outlined pill with white border and text. Overrides the
+   global a.button decoration EDS applies to standalone links. */
+main .teaser-stage a.button:any-link,
+main .teaser-stage a:any-link {
+  align-self: flex-start;
+  margin: 1.5rem 0 0;
+  padding: 11px 38px;
+  border: 1px solid var(--bat-white);
+  border-radius: 20px;
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: var(--bat-white);
+  font-family: var(--heading-font-family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+main .teaser-stage a.button:any-link::after {
+  content: none;
+}
+
+main .teaser-stage a.button:any-link:hover,
+main .teaser-stage a.button:any-link:focus-visible,
+main .teaser-stage a:any-link:hover,
+main .teaser-stage a:any-link:focus-visible {
+  background: var(--bat-white);
+  border-color: var(--bat-white);
+  color: var(--bat-navy);
+  transform: none;
+  box-shadow: none;
+}
+
+/* The link is wrapped in a .button-container <p> by EDS — reset its width cap. */
+.teaser-stage-content p.button-container {
+  max-width: none;
+}
+
+@media (width >= 600px) {
+  .teaser-stage-content {
+    padding: 3rem;
+  }
+}
+
+@media (width >= 900px) {
+  /* Desktop band proportion ~2.41:1, matching the source 1280x532 band. */
+  .teaser-stage {
+    aspect-ratio: 1280 / 532;
+    min-height: 0;
+  }
+
+  .teaser-stage > div,
+  .teaser-stage-content {
+    height: 100%;
+  }
+
+  .teaser-stage-content {
+    padding: 2rem 8%;
+  }
+}
+
+@media (width >= 1200px) {
+  .teaser-stage-content {
+    padding: 2rem 9%;
+  }
+}

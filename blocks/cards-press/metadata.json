@@ -1,0 +1,10 @@
+{
+  "variantName": "cards-press",
+  "baseBlock": "cards",
+  "visualCharacteristics": "Text-only list of press-release items, each with a tag + date meta line, a heading and a short description. No images; items separated by dividers.",
+  "contentPattern": "One row per item: single content cell (tag/date, heading, description).",
+  "usage": "Latest press releases list.",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["cards-press"]
+}

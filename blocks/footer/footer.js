@@ -9,8 +9,9 @@ export default async function decorate(block) {
   // load footer as fragment (skip if aem-embed already provided content)
   if (block.textContent === '') {
     const footerMeta = getMetadata('footer');
-    const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+    const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/content/footer';
     const fragment = await loadFragment(footerPath);
+    if (!fragment) return;
 
     block.textContent = '';
     const footer = document.createElement('div');
@@ -18,19 +19,24 @@ export default async function decorate(block) {
     block.append(footer);
   }
 
-  // merge social icons into copyright row
-  const sections = block.querySelectorAll('.section');
-  if (sections.length >= 4) {
-    const copyrightSection = sections[2];
-    const socialSection = sections[3];
-    const socialUl = socialSection.querySelector('ul');
-    const copyrightWrapper = copyrightSection.querySelector('.default-content-wrapper');
-    if (socialUl && copyrightWrapper) {
-      const pipe = document.createElement('span');
-      pipe.className = 'footer-separator';
-      pipe.textContent = '|';
-      copyrightWrapper.append(pipe, socialUl);
-      socialSection.remove();
-    }
+  // BAT footer: first N sections are content columns; the final section is the
+  // legal bar (legal links + copyright). Group the columns into a grid wrapper
+  // and mark the legal bar so CSS can lay each out.
+  const root = block.querySelector('.footer') || block.firstElementChild;
+  const sections = [...(root ? root.querySelectorAll(':scope > .section') : [])];
+  if (root && sections.length >= 2) {
+    const legal = sections[sections.length - 1];
+    const columns = sections.slice(0, -1);
+
+    const grid = document.createElement('div');
+    grid.className = 'footer-columns';
+    columns.forEach((sec) => {
+      sec.classList.add('footer-column');
+      grid.append(sec);
+    });
+
+    legal.classList.add('footer-legal');
+    root.prepend(grid);
+    root.append(legal);
   }
 }

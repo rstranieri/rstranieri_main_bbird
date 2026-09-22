@@ -55,7 +55,15 @@ function applyTheme(theme) {
   document.body.classList.add(`${t}-scheme`);
 }
 
-const isYoutubeLink = (url) => ['youtube.com', 'www.youtube.com', 'youtu.be'].includes(url.hostname);
+const isYoutubeLink = (url) => {
+  const host = url.hostname;
+  // youtu.be/<id> and youtube.com/embed/<id> are always videos.
+  if (host === 'youtu.be') return url.pathname.length > 1;
+  if (!['youtube.com', 'www.youtube.com'].includes(host)) return false;
+  if (url.pathname.startsWith('/embed/')) return true;
+  // watch?v=<id> is a video; channel/user/@handle pages are not embeddable videos.
+  return url.pathname === '/watch' && url.searchParams.has('v');
+};
 
 function replaceParagraphWithBlock(link, block) {
   const parent = link.parentElement;
@@ -71,6 +79,10 @@ function buildEmbedBlocks(main) {
   youtubeVideos.forEach((anchor) => {
     if (anchor.closest('.embed.block')) return;
     if (anchor.querySelector('.icon')) return;
+    // Skip links in site chrome (header/footer nav) and explicit opt-outs (#_dnb) —
+    // these are navigation links, not embeddable videos.
+    if (anchor.closest('header, footer, nav')) return;
+    if (anchor.hash === '#_dnb') return;
 
     let url;
     try {
@@ -167,11 +179,35 @@ async function inlineColorIcons(scope) {
   });
 }
 
+/**
+ * Apply authored "Section Metadata" blocks to their parent section.
+ * The core decorateSections in aem.js does not consume section-metadata, so we
+ * read each metadata block, add `style` values as classes on the section, expose
+ * other keys as data attributes, then remove the metadata block.
+ * @param {Element} main
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > div > div.section-metadata').forEach((sectionMeta) => {
+    const section = sectionMeta.parentElement;
+    const meta = readBlockConfig(sectionMeta);
+    Object.keys(meta).forEach((key) => {
+      if (key === 'style') {
+        meta.style.split(',').map((s) => toClassName(s.trim())).filter(Boolean)
+          .forEach((s) => section.classList.add(s));
+      } else {
+        section.dataset[toCamelCase(key)] = meta[key];
+      }
+    });
+    sectionMeta.remove();
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   inlineColorIcons(main);
   buildAutoBlocks(main);
+  decorateSectionMetadata(main);
   decorateSections(main);
   decorateBlocks(main);
   if (document.contains(main)) initPageSchemas();

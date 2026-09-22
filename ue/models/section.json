@@ -58,18 +58,27 @@
       "id": "section",
       "components": [
         "cards",
+        "cards-topic",
+        "cards-news",
+        "cards-press",
         "columns",
+        "columns-newsroom",
         "embed",
+        "embed-video",
         "form",
         "fragment",
         "hero",
+        "hero-carousel",
         "image",
         "journey-map",
         "related-articles",
         "search",
         "social-share",
         "tabs",
+        "tabs-spotlight",
         "teaser",
+        "teaser-promo",
+        "teaser-stage",
         "text"
       ]
     }

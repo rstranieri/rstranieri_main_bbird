@@ -1,0 +1,10 @@
+{
+  "variantName": "teaser-stage",
+  "baseBlock": "teaser",
+  "visualCharacteristics": "Full-width band with a background photo and overlaid eyebrow, large heading, body text and a call-to-action button. Dark image background.",
+  "contentPattern": "Single row: image cell + content cell (eyebrow, heading, text, button).",
+  "usage": "Full-width feature band (e.g. People and culture).",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["teaser-stage"]
+}

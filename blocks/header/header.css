@@ -50,14 +50,14 @@ header {
 }
 
 header .nav-wrapper {
-  background-color: light-dark(#faf8f5, var(--color-obsidian));
+  background-color: light-dark(#fff, var(--color-obsidian));
   width: 100%;
   z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  border-bottom: var(--border-heritage);
+  border-bottom: 1px solid light-dark(var(--bat-grey-border, #d7dee8), rgb(255 255 255 / 15%));
   box-shadow: none;
 }
 
@@ -1140,11 +1140,13 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     list-style: none;
     padding: 0;
     margin: 0;
+    min-width: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul > .nav-mega-inner > li.nav-mega-heading > ul > li {
     padding: 0;
     margin: 0;
+    min-width: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul.nav-mega-has-groups > .nav-mega-inner > li.nav-mega-item {
@@ -1174,8 +1176,9 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     font-weight: var(--nav-item-weight);
     text-decoration: none;
     transition: background-color 0.18s ease, color 0.18s ease;
-    overflow-wrap: break-word;
-    max-width: max-content;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-width: 100%;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul > .nav-mega-inner > li.nav-mega-promo {

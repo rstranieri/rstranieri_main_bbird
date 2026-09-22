@@ -1,0 +1,59 @@
+/* Press-release cards – structural layout only (brand styling applied in design pass) */
+
+.cards-press > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cards-press > ul > li {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+}
+
+.cards-press > ul > li:last-child {
+  border-bottom: 0;
+}
+
+.cards-press-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cards-press-body h1,
+.cards-press-body h2,
+.cards-press-body h3,
+.cards-press-body h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.cards-press-body h4 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards-press-body h4 a:hover {
+  text-decoration: underline;
+}
+
+.cards-press-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.cards-press-meta {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  opacity: 0.85;
+}

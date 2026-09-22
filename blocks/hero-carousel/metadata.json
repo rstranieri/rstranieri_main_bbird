@@ -1,0 +1,10 @@
+{
+  "variantName": "hero-carousel",
+  "baseBlock": "hero",
+  "visualCharacteristics": "Full-bleed rotating hero with a large heading, a one-line description and a single call-to-action link overlaid on a background image. Includes dot indicators and prev/next arrows; auto-rotates.",
+  "contentPattern": "One authored row per slide. Each row: image + heading + short description + one link.",
+  "usage": "Homepage top hero showcasing multiple rotating messages.",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["hero-carousel"]
+}

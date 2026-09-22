@@ -1,0 +1,10 @@
+{
+  "variantName": "tabs-spotlight",
+  "baseBlock": "tabs",
+  "visualCharacteristics": "Centered horizontal tab switcher with an underlined active tab. Each panel shows a spotlight content item (e.g. a video teaser). Self-contained within the block.",
+  "contentPattern": "One row per tab: first cell is the tab label, remaining cell(s) are the panel content.",
+  "usage": "In the spotlight tabbed section (RESULTS / SCIENCE / SUSTAINABILITY / PEOPLE / TRANSFORMATION).",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["tabs-spotlight"]
+}

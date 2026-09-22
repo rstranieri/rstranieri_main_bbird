@@ -1,0 +1,10 @@
+{
+  "variantName": "cards-news",
+  "baseBlock": "cards",
+  "visualCharacteristics": "List of news/story cards, each with an image, a category tag + date meta line, a heading and a short description.",
+  "contentPattern": "One row per card: image cell + content cell (tag/date, heading, description).",
+  "usage": "Latest stories and features list.",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["cards-news"]
+}

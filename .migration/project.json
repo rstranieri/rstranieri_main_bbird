@@ -1,0 +1,10 @@
+{
+  "type": "xwalk",
+  "sites": {
+    "rstranieri_main_bbird": {
+      "previewOrg": "rstranieri",
+      "previewSite": "rstranieri_main_bbird",
+      "libraryUrl": "https://content.da.live/rstranieri/rstranieri-main-bbird/docs/library/blocks.json"
+    }
+  }
+}
