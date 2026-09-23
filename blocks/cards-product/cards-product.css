@@ -74,6 +74,19 @@
   font-size: 0.9rem;
 }
 
+/* CTA links are long flavor names (e.g. "Classic Tobacco - Original Series").
+   The global button rule sets white-space: nowrap with wide side padding, which
+   clips them at the narrow tile width — allow the text to wrap and trim the
+   horizontal padding so the full name fits inside the button. */
+.cards-product-body a.button:any-link {
+  display: block;
+  width: 100%;
+  padding-inline: 16px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
 /* Prev/next arrow controls */
 .cards-product-arrow {
   flex: 0 0 auto;
