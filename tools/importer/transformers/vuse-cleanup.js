@@ -79,6 +79,30 @@ export default function transform(hookName, element, payload) {
         if (seenIntroCopy > 1) t.remove();
       }
     });
+
+    // 4. The Drop header cleanup. The source header carries a "The Drop" wordmark
+    //    logo image and an "Explore More" CTA that the live homepage no longer
+    //    shows, and it orders the intro copy BEFORE the heading. Remove the logo
+    //    + CTA, and move the "The Drop" heading ABOVE the intro line so the order
+    //    reads: heading → "Watch, play and earn points…" → quiz carousel.
+    element.querySelectorAll('img[src*="TheDrop-Logo"]').forEach((img) => {
+      const wrapper = img.closest('.image') || img.closest('.cmp-image') || img;
+      wrapper.remove();
+    });
+    element.querySelectorAll('.button').forEach((btn) => {
+      if (/explore more/i.test((btn.textContent || '').trim())) btn.remove();
+    });
+    const dropHeading = [...element.querySelectorAll('.text')].find(
+      (t) => /^the drop$/i.test((t.textContent || '').trim()) && t.querySelector('h1, h2'),
+    );
+    const introCopy = [...element.querySelectorAll('.text')].find(
+      (t) => /watch, play and earn points/i.test(t.textContent || ''),
+    );
+    if (dropHeading && introCopy && introCopy.parentNode
+      && (introCopy.compareDocumentPosition(dropHeading) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+      // heading currently comes after the intro — move it before.
+      introCopy.parentNode.insertBefore(dropHeading, introCopy);
+    }
   }
 
   if (hookName === TransformHook.afterTransform) {
