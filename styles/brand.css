@@ -1,10 +1,11 @@
 /*
  * Vuse brand tokens — extracted from the vusevapor.com homepage export.
- * Vuse's brand font is Mundial (proprietary MyFonts) with a Gotham fallback;
- * neither is redistributable, so Montserrat (bundled) is used as the closest
- * geometric-sans. Palette: midnight/navy blues with a magenta accent and the
- * signature metallic-silver button gradient.
+ * Vuse's brand font is Mundial, delivered via the site's own Adobe Fonts
+ * (Typekit) kit "hxh4btv" — imported below. Montserrat (bundled) remains the
+ * fallback if the kit fails to load. Palette: midnight/navy blues with a
+ * magenta accent and the signature metallic-silver button gradient.
  */
+@import url('https://use.typekit.net/hxh4btv.css');
 
 :root {
   /* Vuse brand palette */
@@ -22,8 +23,8 @@
   --vuse-btn-silver: linear-gradient(90.21deg, #90969e 0.18%, #bec4cd 20.15%, #fff 60.07%, #bec4cd 79.9%, #90969e 100%);
 
   /* Map brand tokens onto the design-system variables blocks inherit */
-  --heading-font-family: montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
-  --body-font-family: montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
+  --heading-font-family: mundial, montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
+  --body-font-family: mundial, montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
   --background-color: var(--vuse-white);
   --text-color: var(--vuse-navy);
   --link-color: var(--vuse-blue);

@@ -117,13 +117,14 @@
   --color-accent: var(--color-gold);
   --color-shaded: light-dark(var(--color-parchment), var(--color-card-dark));
 
-  /* fonts */
-  --font-family: montserrat, "Trebuchet MS", sans-serif;
+  /* fonts — Vuse's brand font is Mundial (Adobe Fonts kit hxh4btv, loaded in
+     brand.css); montserrat is the bundled fallback. */
+  --font-family: mundial, montserrat, "Trebuchet MS", sans-serif;
   --font-family-serif: "EB Garamond", georgia, serif;
   --font-family-mono: "JetBrains Mono", "Courier New", monospace;
   --body-font-family: var(--font-family);
 
-  /* BAT uses a geometric sans (Aeroport) for headings — map to the bundled sans, not the serif */
+  /* Vuse uses Mundial for headings too */
   --heading-font-family: var(--font-family);
 
   /* heading sizes */
