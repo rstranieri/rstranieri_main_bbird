@@ -43,6 +43,11 @@
   --main-block-space: var(--space-l);
   --section-block-space: var(--space-l);
 
+  /* vertical padding for full-width colored bands (light/grey/dark/accent) —
+     kept consistent across every band and scaled up at wider breakpoints so
+     the section rhythm matches the source's generous band spacing */
+  --band-block-space: var(--space-2xl);
+
   /* color scheme */
   color-scheme: light dark;
 
@@ -196,6 +201,7 @@
     --content-padding-inline: var(--space-l);
     --main-block-space: var(--space-xl);
     --section-block-space: var(--space-xl);
+    --band-block-space: var(--space-3xl);
   }
 }
 
@@ -213,6 +219,7 @@
     --heading-font-size-xs: 18px;
     --content-padding-inline: var(--space-xl);
     --section-block-space: var(--space-3xl);
+    --band-block-space: var(--space-4xl);
   }
 }
 
@@ -618,14 +625,14 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: var(--section-block-space) 0;
+  padding: var(--band-block-space) 0;
 }
 
 /* Light-grey feature section */
 main .section.grey {
   background-color: var(--vuse-grey, #f9f9f9);
   margin: 0;
-  padding: var(--space-3xl) 0;
+  padding: var(--band-block-space) 0;
 }
 
 /* Dark navy section */
@@ -633,7 +640,7 @@ main .section.dark {
   background-color: var(--vuse-navy, #1b365d);
   color: #fff;
   margin: 0;
-  padding: var(--space-3xl) 0;
+  padding: var(--band-block-space) 0;
 }
 
 main .section.dark :is(h1, h2, h3, h4, h5, h6),
@@ -647,7 +654,7 @@ main .section.accent {
   background-color: var(--vuse-blue-deep, #294a93);
   color: #fff;
   margin: 0;
-  padding: var(--space-3xl) 0;
+  padding: var(--band-block-space) 0;
 }
 
 main .section.accent :is(h1, h2, h3, h4, h5, h6),
