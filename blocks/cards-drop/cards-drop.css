@@ -99,12 +99,17 @@
   border-bottom: 2px solid var(--vuse-navy, #1b365d);
 }
 
-.cards-drop-arrow--prev::before {
+.cards-drop-arrow-prev::before {
   transform: translate(-30%, -50%) rotate(135deg);
 }
 
-.cards-drop-arrow--next::before {
+.cards-drop-arrow-next::before {
   transform: translate(-70%, -50%) rotate(-45deg);
+}
+
+.cards-drop-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 .cards-drop-arrow:hover:not(:disabled) {
@@ -113,11 +118,6 @@
 
 .cards-drop-arrow:hover:not(:disabled)::before {
   border-color: #fff;
-}
-
-.cards-drop-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
 }
 
 @media (width >= 600px) {

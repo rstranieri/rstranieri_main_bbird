@@ -44,7 +44,7 @@ export default function decorate(block) {
   const mkArrow = (dir) => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = `cards-drop-arrow cards-drop-arrow--${dir}`;
+    btn.className = `cards-drop-arrow cards-drop-arrow-${dir}`;
     btn.setAttribute('aria-label', dir === 'prev' ? 'Previous' : 'Next');
     return btn;
   };
