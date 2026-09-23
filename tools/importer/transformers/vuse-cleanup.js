@@ -54,6 +54,31 @@ export default function transform(hookName, element, payload) {
     dedupeKeepFirst('.cmp-hero-banner--videoBackground');
     // One Offers transaction tile (two per-state offers-tile sections exist).
     dedupeKeepFirst('.cmp-section.offers-tile');
+
+    // 3. The Drop intro ships two layout variants in the same section: a
+    //    (desktop) logo + "exclusive content drops" + Explore More group, and a
+    //    second group with the Drop_Mobile_Cards image, a duplicate "The Drop"
+    //    <h1>, and a "premium content from Vuse" line. Keep the first, drop the
+    //    second: remove the duplicate mobile-cards image and every text
+    //    component after the first that repeats the intro copy/heading.
+    element.querySelectorAll('img[src*="Drop_Mobile_Cards"]').forEach((img) => {
+      const wrapper = img.closest('.image') || img.closest('.cmp-image') || img;
+      wrapper.remove();
+    });
+    let seenDropHeading = 0;
+    let seenIntroCopy = 0;
+    element.querySelectorAll('.text').forEach((t) => {
+      const txt = (t.textContent || '').trim();
+      const isDropHeading = /^the drop$/i.test(txt) && t.querySelector('h1, h2');
+      const isIntroCopy = /watch, play and earn points/i.test(txt);
+      if (isDropHeading) {
+        seenDropHeading += 1;
+        if (seenDropHeading > 1) t.remove();
+      } else if (isIntroCopy) {
+        seenIntroCopy += 1;
+        if (seenIntroCopy > 1) t.remove();
+      }
+    });
   }
 
   if (hookName === TransformHook.afterTransform) {
