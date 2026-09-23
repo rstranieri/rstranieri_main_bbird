@@ -21,9 +21,28 @@ export default function parse(element, { document }) {
     const titleLink = card.querySelector('.article-teaser__title-link, .article-teaser__title a[href]');
     const description = card.querySelector('.article-teaser__description');
     const actionLink = card.querySelector('.article-teaser__action-link');
+    // Reward points badge (e.g. "+25 PTS") and category label (e.g. "Quiz")
+    // overlaid on the card image on the source site.
+    const points = card.querySelector('.article-teaser__articleInfo--articlePoints');
+    const category = card.querySelector('.article-teaser__category');
 
     // Content cell: a linked heading, optional description, optional CTA.
     const contentCell = [c('text')];
+
+    // Emit category + points first as distinct marker paragraphs; the block JS
+    // lifts these onto the image as overlay badges. Category is prefixed with a
+    // bullet marker and points keep their "+NN PTS" form so the JS can detect
+    // them without colliding with real body copy.
+    if (category && (category.textContent || '').trim()) {
+      const p = document.createElement('p');
+      p.textContent = `● ${category.textContent.trim()}`;
+      contentCell.push(p);
+    }
+    if (points && (points.textContent || '').trim()) {
+      const p = document.createElement('p');
+      p.textContent = points.textContent.trim();
+      contentCell.push(p);
+    }
 
     if (titleLink && (titleLink.textContent || '').trim()) {
       const h3 = document.createElement('h3');

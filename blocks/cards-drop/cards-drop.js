@@ -17,11 +17,41 @@ export default function decorate(block) {
     const mediaCell = cells.find((c) => c.querySelector('picture, img')) || cells[0];
     const contentCell = cells.find((c) => c !== mediaCell) || cells[1] || cells[0];
 
+    // Pull the category ("● Quiz"/"● Poll") and reward points ("+25 PTS")
+    // marker paragraphs out of the content cell — they render as overlay
+    // badges on the image, matching the source card design.
+    let categoryText = '';
+    let pointsText = '';
+    if (contentCell && contentCell !== mediaCell) {
+      [...contentCell.querySelectorAll('p')].forEach((p) => {
+        const txt = (p.textContent || '').trim();
+        if (/^●\s*/.test(txt)) {
+          categoryText = txt.replace(/^●\s*/, '');
+          p.remove();
+        } else if (/^\+?\d+\s*PTS$/i.test(txt)) {
+          pointsText = txt;
+          p.remove();
+        }
+      });
+    }
+
     const img = mediaCell && mediaCell.querySelector('img');
     if (img) {
       const imageDiv = document.createElement('div');
       imageDiv.className = 'cards-drop-image';
       imageDiv.append(createOptimizedPicture(img.src, img.alt || '', false, [{ width: '600' }]));
+      if (pointsText) {
+        const badge = document.createElement('span');
+        badge.className = 'cards-drop-points';
+        badge.textContent = pointsText.replace(/^\+?/, '+');
+        imageDiv.append(badge);
+      }
+      if (categoryText) {
+        const tag = document.createElement('span');
+        tag.className = 'cards-drop-category';
+        tag.textContent = categoryText;
+        imageDiv.append(tag);
+      }
       li.append(imageDiv);
     }
 
