@@ -19,30 +19,21 @@ export default function decorate(block) {
   media.className = 'hero-video-media';
 
   // Video source: an author can point at an .mp4 either via a link or the block's
-  // data-video attribute. When neither is present, derive it by convention from
-  // the poster image (a `*-poster.jpg` companion to a `*.mp4` in the same folder),
-  // because a raw .mp4 URL in a table cell gets mangled by the md2da roundtrip.
+  // data-video attribute. Otherwise fall back to the bundled hero video served
+  // from the repo (a raw .mp4 URL in a table cell gets mangled by the md2da
+  // roundtrip, and Document Authoring only ingests <img> refs — not videos — so
+  // the video is committed to /videos/ and referenced by absolute path here).
   const picture = mediaCell?.querySelector('picture');
-  let img = mediaCell?.querySelector('img');
+  const img = mediaCell?.querySelector('img');
   const videoLink = mediaCell?.querySelector('a[href$=".mp4"], a[href*=".mp4"]');
   let videoUrl = '';
   if (videoLink) {
     videoUrl = videoLink.getAttribute('href');
   } else if (block.dataset.video) {
     videoUrl = block.dataset.video;
-  } else if (img && /-poster\.(jpg|jpeg|png|webp)(\?|$)/i.test(img.src)) {
-    videoUrl = img.src.replace(/-poster\.(?:jpg|jpeg|png|webp)(\?|$)/i, '.mp4$1').replace(/hero\.mp4/i, 'hero-desktop.mp4');
-  }
-
-  // Fallback: this block is purpose-built for the Vuse full-bleed video hero.
-  // When the media cell carries no image or video (the poster reference can be
-  // dropped by the markdown roundtrip), use the bundled hero assets so the hero
-  // is never blank.
-  if (!videoUrl && !picture && !img) {
-    videoUrl = 'images/hero-desktop.mp4';
-    img = document.createElement('img');
-    img.src = 'images/hero-poster.jpg';
-    img.alt = '';
+  } else {
+    // This block is purpose-built for the Vuse full-bleed video hero.
+    videoUrl = '/videos/hero-desktop.mp4';
   }
 
   if (/\.mp4(\?|$)/i.test(videoUrl)) {
