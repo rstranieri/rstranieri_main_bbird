@@ -8,12 +8,24 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
  * @param {Element} block The hero-video block element
  */
 export default function decorate(block) {
-  const row = block.firstElementChild;
-  if (!row) return;
+  if (!block.firstElementChild) return;
 
-  const cells = [...row.children];
-  const mediaCell = cells[0];
-  const contentCell = cells[1] || cells[0];
+  // The block may be authored either as one row with two cells (media | text)
+  // or as two single-column rows (media, then text) — the importer emits the
+  // latter to keep the markdown table narrow. Flatten to the innermost cells
+  // and pick the media cell (has an image/picture/mp4 link) vs the content cell
+  // (everything else, e.g. the headline + CTA).
+  const rows = [...block.children];
+  let cells = rows.flatMap((r) => [...r.children]);
+  // A single-column row wraps its content in one extra <div>; unwrap those.
+  cells = cells.map((c) => (
+    c.children.length === 1 && c.firstElementChild.tagName === 'DIV' ? c.firstElementChild : c
+  ));
+
+  const mediaCell = cells.find((c) => c.querySelector('picture, img, a[href*=".mp4"]')) || cells[0];
+  const contentCell = cells.find((c) => c !== mediaCell && (
+    c.querySelector('h1, h2, h3, a, p') || (c.textContent || '').trim()
+  )) || null;
 
   const media = document.createElement('div');
   media.className = 'hero-video-media';
@@ -53,7 +65,7 @@ export default function decorate(block) {
 
   const content = document.createElement('div');
   content.className = 'hero-video-content';
-  if (contentCell && contentCell !== mediaCell) {
+  if (contentCell) {
     while (contentCell.firstChild) content.append(contentCell.firstChild);
   }
 

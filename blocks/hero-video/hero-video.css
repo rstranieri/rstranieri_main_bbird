@@ -30,25 +30,30 @@
   object-fit: cover;
 }
 
-/* Legibility scrim */
+/* Legibility scrim — subtle top+bottom darkening so the top-anchored headline
+   and its CTA stay legible over the video without hiding the device shot. */
 .hero-video-media::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 15%) 45%, rgb(0 0 0 / 5%) 100%);
+  background:
+    linear-gradient(to bottom, rgb(0 0 0 / 35%) 0%, rgb(0 0 0 / 5%) 30%, rgb(0 0 0 / 0%) 55%),
+    linear-gradient(to top, rgb(0 0 0 / 30%) 0%, rgb(0 0 0 / 0%) 30%);
 }
 
+/* Content is anchored to the TOP and centered, matching the source hero */
 .hero-video-content {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
   min-height: inherit;
-  padding: 2rem 1.5rem 3rem;
+  padding: 3rem 1.5rem;
   color: #fff;
+  text-align: center;
 }
 
 .hero-video-content h1,
@@ -56,9 +61,13 @@
   margin: 0;
   font-family: var(--heading-font-family);
   font-weight: 700;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.05;
+  font-size: 2.125rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
   color: #fff;
+
+  /* source uses a subtle drop-shadow for legibility over the video */
+  filter: drop-shadow(0 1px 1px rgb(29 29 27 / 90%));
 }
 
 .hero-video-content p {
@@ -71,7 +80,13 @@
   }
 
   .hero-video-content {
-    padding: 3rem;
+    padding: 3.5rem 3rem;
+    gap: 1.5rem;
+  }
+
+  .hero-video-content h1,
+  .hero-video-content h2 {
+    font-size: 3rem;
   }
 }
 
