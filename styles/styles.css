@@ -627,7 +627,7 @@ article.article-body > .section > div {
 main > .section.teaser-transaction-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 2rem;
   max-width: var(--grid-container-width);
   margin-inline: auto;
   padding-inline: var(--content-padding-inline);
@@ -643,6 +643,13 @@ main > .section.teaser-transaction-container > .teaser-transaction-wrapper {
   main > .section.teaser-transaction-container {
     grid-template-columns: repeat(3, 1fr);
     align-items: start;
+    gap: 2.5rem;
+  }
+}
+
+@media (width >= 900px) {
+  main > .section.teaser-transaction-container {
+    gap: 3rem;
   }
 }
 
