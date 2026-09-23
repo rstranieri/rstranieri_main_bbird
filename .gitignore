@@ -25,3 +25,6 @@ tools/importer/bd-snapshots/
 tools/importer/offline-import.mjs
 tools/importer/grab-poster.mjs
 tools/importer/import-home.bundle.js
+import-work-auth/
+import-work-auth2/
+tools/importer/grab-hero-video.mjs

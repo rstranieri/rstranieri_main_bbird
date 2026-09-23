@@ -11,7 +11,9 @@ export default function decorate(block) {
   if (!row) return;
 
   const cells = [...row.children];
-  const mediaCell = cells.find((c) => c.querySelector('picture'));
+  // Media cell carries an image as a <picture> or a bare <img> (local images
+  // are not always wrapped by the decoration pipeline).
+  const mediaCell = cells.find((c) => c.querySelector('picture, img'));
   const contentCell = cells.find((c) => c !== mediaCell) || cells[0];
 
   if (mediaCell) {
@@ -19,7 +21,8 @@ export default function decorate(block) {
     const img = mediaCell.querySelector('img');
     if (img) {
       const picture = mediaCell.querySelector('picture');
-      picture.replaceWith(createOptimizedPicture(img.src, img.alt || '', false, [{ width: '1600' }]));
+      const optimized = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '1600' }]);
+      (picture || img).replaceWith(optimized);
     }
   }
 

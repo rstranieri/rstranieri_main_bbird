@@ -12,16 +12,16 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     const cells = [...row.children];
-    const mediaCell = cells.find((c) => c.querySelector('picture')) || cells[0];
+    // The media cell is whichever cell carries an image (a <picture> or a bare
+    // <img> — local images are not always wrapped by the decoration pipeline).
+    const mediaCell = cells.find((c) => c.querySelector('picture, img')) || cells[0];
     const contentCell = cells.find((c) => c !== mediaCell) || cells[1] || cells[0];
 
-    if (mediaCell && mediaCell.querySelector('picture')) {
+    const img = mediaCell && mediaCell.querySelector('img');
+    if (img) {
       const imageDiv = document.createElement('div');
       imageDiv.className = 'cards-product-image';
-      const img = mediaCell.querySelector('img');
-      if (img) {
-        imageDiv.append(createOptimizedPicture(img.src, img.alt || '', false, [{ width: '600' }]));
-      }
+      imageDiv.append(createOptimizedPicture(img.src, img.alt || '', false, [{ width: '600' }]));
       li.append(imageDiv);
     }
 

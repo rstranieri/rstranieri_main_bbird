@@ -19,16 +19,29 @@ export default function parse(element, { document }) {
 
   // --- Media: background video URL ---------------------------------------
   // Prefer the desktop <source>, else any .mp4 source, else a .mp4 anchor.
+  // The source video is bot-protected, so a local copy is downloaded to
+  // images/hero-desktop.mp4 and a poster frame to images/hero-poster.jpg; we
+  // emit those local (short, roundtrip-safe) paths rather than the remote URL.
   const desktopSource = element.querySelector(
     'video.cmp-hero-banner__video-background__video--desktop source[src], source[src*=".mp4"]',
   );
   const anyMp4 = element.querySelector('source[src*=".mp4"], a[href*=".mp4"]');
-  const videoUrl = (desktopSource && desktopSource.getAttribute('src'))
+  const remoteVideoUrl = (desktopSource && desktopSource.getAttribute('src'))
     || (anyMp4 && (anyMp4.getAttribute('src') || anyMp4.getAttribute('href')))
     || '';
+  // Map the known desktop hero video to its local copy.
+  const videoUrl = /Vuse_Homepage_HeroBanner_x2_desktop\.mp4/i.test(remoteVideoUrl)
+    ? 'images/hero-desktop.mp4'
+    : remoteVideoUrl;
 
-  // Optional poster / fallback image.
-  const posterImg = element.querySelector('.cmp-hero-banner__poster img, picture img, img');
+  // Poster / fallback image. Use the locally grabbed poster frame when the
+  // source hero has no explicit poster image (video-background heroes don't).
+  let posterImg = element.querySelector('.cmp-hero-banner__poster img, picture img, img');
+  if (!posterImg && videoUrl) {
+    posterImg = document.createElement('img');
+    posterImg.setAttribute('src', 'images/hero-poster.jpg');
+    posterImg.setAttribute('alt', '');
+  }
 
   // --- Content: headline + CTA -------------------------------------------
   const headlineSpan = element.querySelector('.cmp-hero-banner__headline1[data-text], .cmp-hero-banner__headline1');
@@ -49,6 +62,11 @@ export default function parse(element, { document }) {
   // long .mp4 URL inside a markdown table cell gets escaped into literal text by
   // the md2da roundtrip, so we keep it out of the table entirely. The block JS
   // reads data-video (or a poster image) to build the background at render time.
+  // Media cell holds ONLY the poster image — keeping the markdown table narrow
+  // and roundtrip-safe. The background video is NOT put in a table cell (a
+  // .mp4 link/URL there gets mangled by the md2da roundtrip). Instead the block
+  // JS derives the video from the poster by convention (hero-poster.jpg ->
+  // hero-desktop.mp4 in the same folder).
   const mediaCell = [c('image')];
   if (posterImg) mediaCell.push(posterImg);
 

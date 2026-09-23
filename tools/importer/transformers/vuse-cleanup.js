@@ -30,6 +30,30 @@ export default function transform(hookName, element, payload) {
       // Camera capture modal used by the loyalty code-entry widget (780)
       '.cmp-camera',
     ]);
+
+    // --- De-duplication of responsive + geo-targeted variants ---
+    // The source ships every module twice-or-more: a mobile-only copy
+    // (.d-md-none, hidden >=768px) alongside the desktop copy (.d-md-block),
+    // plus per-US-state geo variants of whole sections (.cmp-section.d-none
+    // carrying at_XX state classes). Importing all of them produces duplicated
+    // headings, paragraphs, the Offers tile, and the hero. Keep exactly one
+    // canonical (desktop) copy of each.
+
+    // 1. Drop mobile-only duplicate nodes (desktop .d-md-block copy is kept).
+    WebImporter.DOMUtils.remove(element, ['.d-md-none']);
+
+    // 2. For groups that repeat as geo/state variants, keep only the FIRST
+    //    occurrence and remove the rest.
+    const dedupeKeepFirst = (selector) => {
+      const nodes = element.querySelectorAll(selector);
+      for (let i = 1; i < nodes.length; i += 1) {
+        nodes[i].remove();
+      }
+    };
+    // One video hero (target design shows a single device+wordmark video hero).
+    dedupeKeepFirst('.cmp-hero-banner--videoBackground');
+    // One Offers transaction tile (two per-state offers-tile sections exist).
+    dedupeKeepFirst('.cmp-section.offers-tile');
   }
 
   if (hookName === TransformHook.afterTransform) {
