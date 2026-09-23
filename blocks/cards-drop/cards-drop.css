@@ -1,15 +1,38 @@
-/* Drop cards – horizontal row of article/reward image cards with linked titles */
+/* Drop cards – horizontal carousel of article/reward (quiz) image cards */
 
-.cards-drop > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+.cards-drop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
 }
 
-.cards-drop > ul > li {
+.cards-drop-viewport {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.cards-drop-track {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0 1.5rem;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards-drop-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.cards-drop-track > li {
+  flex: 0 0 auto;
+  width: 78%;
+  max-width: 322px;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -26,7 +49,7 @@
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .cards-drop-body {
@@ -51,15 +74,64 @@
   font-size: 0.9rem;
 }
 
+/* Prev/next arrow controls */
+.cards-drop-arrow {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--vuse-navy, #1b365d);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.cards-drop-arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--vuse-navy, #1b365d);
+  border-bottom: 2px solid var(--vuse-navy, #1b365d);
+}
+
+.cards-drop-arrow--prev::before {
+  transform: translate(-30%, -50%) rotate(135deg);
+}
+
+.cards-drop-arrow--next::before {
+  transform: translate(-70%, -50%) rotate(-45deg);
+}
+
+.cards-drop-arrow:hover:not(:disabled) {
+  background: var(--vuse-navy, #1b365d);
+}
+
+.cards-drop-arrow:hover:not(:disabled)::before {
+  border-color: #fff;
+}
+
+.cards-drop-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
 @media (width >= 600px) {
-  .cards-drop > ul {
-    grid-template-columns: repeat(3, 1fr);
+  .cards-drop-track > li {
+    width: 46%;
   }
 }
 
 @media (width >= 900px) {
-  .cards-drop > ul {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.25rem;
+  .cards-drop {
+    gap: 1rem;
+  }
+
+  .cards-drop-track > li {
+    width: 322px;
   }
 }
