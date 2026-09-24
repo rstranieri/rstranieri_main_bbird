@@ -29,6 +29,8 @@ export default function transform(hookName, element, payload) {
       '.cmp-form',
       // Camera capture modal used by the loyalty code-entry widget (780)
       '.cmp-camera',
+      // "Please wait…" loader text (Pro page flavor-finder widget placeholder)
+      '.please-wait-text',
     ]);
 
     // --- De-duplication of responsive + geo-targeted variants ---
@@ -103,6 +105,15 @@ export default function transform(hookName, element, payload) {
       // heading currently comes after the intro — move it before.
       introCopy.parentNode.insertBefore(dropHeading, introCopy);
     }
+
+    // 5. Dead video-component links: the Pro page's inline product-video widgets
+    //    leave behind empty <a href="....mp4"> anchors (the player is JS-driven).
+    //    They carry no text/media, so drop them rather than leak a bare mp4 link.
+    element.querySelectorAll('a[href$=".mp4"]').forEach((a) => {
+      if (!a.querySelector('img, picture, video') && !(a.textContent || '').trim()) {
+        (a.closest('p') && !a.closest('p').textContent.trim() ? a.closest('p') : a).remove();
+      }
+    });
   }
 
   if (hookName === TransformHook.afterTransform) {

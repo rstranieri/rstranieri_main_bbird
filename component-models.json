@@ -420,6 +420,36 @@
     ]
   },
   {
+    "id": "feature-cards",
+    "fields": []
+  },
+  {
+    "id": "feature-cards-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Feature Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Feature title and description"
+      }
+    ]
+  },
+  {
     "id": "form",
     "fields": [
       {

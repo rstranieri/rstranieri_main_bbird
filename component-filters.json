@@ -110,6 +110,12 @@
     ]
   },
   {
+    "id": "feature-cards",
+    "components": [
+      "feature-cards-item"
+    ]
+  },
+  {
     "id": "journey-map",
     "components": [
       "journey-map-step"

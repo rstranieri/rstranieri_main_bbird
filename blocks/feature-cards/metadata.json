@@ -1,0 +1,10 @@
+{
+  "variantName": "feature-cards",
+  "baseBlock": "cards",
+  "visualCharacteristics": "Row of feature highlights, each an icon above a title and short description, centered; 4-up grid on desktop, stacking on smaller screens.",
+  "contentPattern": "One row per feature: icon image cell + content cell (title heading + description).",
+  "usage": "Product key-features grids (e.g. the Vuse Pro 'Key Features' section).",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["feature-cards"]
+}
