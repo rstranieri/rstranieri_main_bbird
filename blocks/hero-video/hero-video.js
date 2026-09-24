@@ -38,14 +38,21 @@ export default function decorate(block) {
   const picture = mediaCell?.querySelector('picture');
   const img = mediaCell?.querySelector('img');
   const videoLink = mediaCell?.querySelector('a[href$=".mp4"], a[href*=".mp4"]');
+  // Derive the background video from the poster image by convention: a poster
+  // named "<stem>-poster.jpg" pairs with the committed video "/videos/<stem>.mp4"
+  // (e.g. pro-hero-poster.jpg → /videos/pro-hero.mp4). This lets each page carry
+  // its own hero video without an .mp4 URL in a table cell (which md2da mangles).
+  const posterStem = img && (img.getAttribute('src') || '').match(/([\w-]+)-poster\.(?:jpg|jpeg|png|webp)(?:\?|$)/i);
   let videoUrl = '';
   if (videoLink) {
     videoUrl = videoLink.getAttribute('href');
   } else if (block.dataset.video) {
     videoUrl = block.dataset.video;
+  } else if (posterStem) {
+    videoUrl = `/videos/${posterStem[1]}.mp4`;
   } else {
     // This block is purpose-built for the Vuse full-bleed video hero.
-    videoUrl = '/videos/hero-desktop.mp4';
+    videoUrl = '/videos/hero.mp4';
   }
 
   if (/\.mp4(\?|$)/i.test(videoUrl)) {

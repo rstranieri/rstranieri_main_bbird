@@ -29,17 +29,22 @@ export default function parse(element, { document }) {
   const remoteVideoUrl = (desktopSource && desktopSource.getAttribute('src'))
     || (anyMp4 && (anyMp4.getAttribute('src') || anyMp4.getAttribute('href')))
     || '';
-  // Map the known desktop hero video to its local copy.
-  const videoUrl = /Vuse_Homepage_HeroBanner_x2_desktop\.mp4/i.test(remoteVideoUrl)
-    ? 'images/hero-desktop.mp4'
-    : remoteVideoUrl;
+  // Map the known source hero videos to their local copies. Each page's video
+  // is downloaded to /videos/<slug>.mp4 with a matching poster frame at
+  // images/<slug>-poster.jpg; the block JS derives the .mp4 from the poster.
+  const VIDEO_MAP = [
+    { match: /Vuse_Homepage_HeroBanner_x2_desktop\.mp4/i, poster: 'images/hero-poster.jpg' },
+    { match: /productVideo_desktop3?\.mp4/i, poster: 'images/pro-hero-poster.jpg' },
+  ];
+  const mapped = VIDEO_MAP.find((v) => v.match.test(remoteVideoUrl));
+  const videoUrl = mapped ? mapped.poster.replace('images/', '').replace(/-poster\.jpg$/, '.mp4') : remoteVideoUrl;
 
   // Poster / fallback image. Use the locally grabbed poster frame when the
   // source hero has no explicit poster image (video-background heroes don't).
   let posterImg = element.querySelector('.cmp-hero-banner__poster img, picture img, img');
-  if (!posterImg && videoUrl) {
+  if (!posterImg && mapped) {
     posterImg = document.createElement('img');
-    posterImg.setAttribute('src', 'images/hero-poster.jpg');
+    posterImg.setAttribute('src', mapped.poster);
     posterImg.setAttribute('alt', '');
   }
 

@@ -414,6 +414,45 @@
           }
         },
         {
+          "title": "Feature Cards",
+          "id": "feature-cards",
+          "model": "feature-cards",
+          "filter": "feature-cards",
+          "plugins": {
+            "da": {
+              "name": "feature-cards",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Feature Card Item",
+          "id": "feature-cards-item",
+          "model": "feature-cards-item",
+          "plugins": {
+            "da": {
+              "name": "feature-cards-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Form",
           "id": "form",
           "model": "form",

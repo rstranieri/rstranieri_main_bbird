@@ -28,3 +28,6 @@ tools/importer/import-home.bundle.js
 import-work-auth/
 import-work-auth2/
 tools/importer/grab-hero-video.mjs
+tools/importer/import-pro.bundle.js
+tools/importer/offline-import-pro.mjs
+tools/importer/grab-pro-poster.mjs
