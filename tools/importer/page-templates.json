@@ -6,140 +6,160 @@
     {
       "name": "home",
       "urls": [
-        "https://www.bat.com/"
+        "https://www.vusevapor.com/"
       ],
-      "representativeUrl": "https://www.bat.com/",
-      "description": "",
+      "representativeUrl": "https://www.vusevapor.com/",
+      "description": "Vuse homepage",
       "urlPattern": "/",
       "blocks": [
         {
-          "name": "hero-carousel",
+          "name": "hero-video",
           "instances": [
-            ".corp-hero-carousel.carousel"
+            ".cmp-hero-banner--videoBackground"
           ]
         },
         {
-          "name": "teaser-promo",
+          "name": "cards-drop",
           "instances": [
-            ".corp-hero-carousel__experience-fragment"
-          ]
-        },
-        {
-          "name": "cards-topic",
-          "instances": [
-            ".columncontrol__base.columncontrol__grid--lt4"
+            ".article-list.cmp-article-list__redesign"
           ]
         },
         {
           "name": "teaser-stage",
           "instances": [
-            ".batcom-teaser.batcom-teaser-corp-stage"
+            ".cmp-section--background-img",
+            "section.cmp-gallery-parallax"
           ]
         },
         {
-          "name": "columns-newsroom",
+          "name": "cards-product",
           "instances": [
-            ".batcom-columncontrol.columncontrol--home.columncontrol--large-height"
+            "#carousel-exclude-pro.cmp-carousel",
+            "#carousel-include-pro.cmp-carousel"
           ]
         },
         {
-          "name": "cards-news",
+          "name": "teaser-transaction",
           "instances": [
-            ".batcom-list.batcom-layout--twoColumns.batcom-list--news-and-stories"
-          ]
-        },
-        {
-          "name": "cards-press",
-          "instances": [
-            ".batcom-list.batcom-layout--oneColumn.batcom-list--news-and-stories"
-          ]
-        },
-        {
-          "name": "tabs-spotlight",
-          "instances": [
-            ".batcom-tabs.tabs.panelcontainer"
-          ]
-        },
-        {
-          "name": "embed-video",
-          "instances": [
-            ".batcom-video"
+            ".teaser.cmp-teaser--background-image-height-teaser"
           ]
         }
       ],
       "sections": [
         {
-          "id": "rc1c2c2",
-          "name": "Hero carousel",
+          "id": "sec-hero-1",
+          "name": "Hero banner — Vapor Done Right (video background)",
           "selector": [
-            ".batcom-container.batcom-container--full-page-width.batcom-container--noSpacing"
+            ".cmp-hero-banner--videoBackground[id='627732359']"
           ],
-          "style": null,
+          "style": "dark",
           "blocks": [
-            "hero-carousel",
-            "teaser-promo"
+            "hero-video"
           ],
           "defaultContent": []
         },
         {
-          "id": "rc1c2c3",
-          "name": "Our transformation",
+          "id": "sec-hero-2",
+          "name": "Hero banner #2 — secondary product hero (video background)",
           "selector": [
-            ".batcom-container.batcom-space--smallBottom.aem-GridColumn--laptop--none.aem-GridColumn--offset--laptop--0"
-          ],
-          "style": "light",
-          "blocks": [
-            "cards-topic",
-            "teaser-stage"
-          ],
-          "defaultContent": [
-            ".batcom-container.batcom-space--smallBottom.aem-GridColumn--laptop--none .batcom-text.text.batcom-space--smallBottom"
-          ]
-        },
-        {
-          "id": "rc1c2c5",
-          "name": "Latest stories and features / Latest press releases",
-          "selector": [
-            ".batcom-columncontrol.columncontrol--home.columncontrol--large-height"
+            ".cmp-hero-banner--videoBackground[id='1120845041']"
           ],
           "style": "dark",
           "blocks": [
-            "columns-newsroom",
-            "cards-news",
-            "cards-press"
+            "hero-video"
           ],
-          "defaultContent": [
-            ".batcom-columncontrol--home .batcom-button.batcom-button--center"
-          ]
+          "defaultContent": []
         },
         {
-          "id": "rc1c2c6",
-          "name": "In the spotlight",
+          "id": "sec-find-your-flavor",
+          "name": "Find Your Flavor CTA",
           "selector": [
-            ".batcom-container.batcom-container--background-full-page-width.batcom-container--primary-light"
+            ".button.cmp-button--vusePro-btn"
           ],
-          "style": "grey",
-          "blocks": [
-            "tabs-spotlight",
-            "embed-video"
-          ],
-          "defaultContent": [
-            ".batcom-container--primary-light .batcom-text.text.batcom-container.batcom-space--noBottomSpace"
-          ]
+          "style": "light",
+          "blocks": [],
+          "defaultContent": []
         },
         {
-          "id": "rc1c2c7",
-          "name": "Latest results, reports and research",
+          "id": "sec-the-drop",
+          "name": "The Drop — promo intro + article/reward cards",
           "selector": [
-            ".batcom-container.container.responsivegrid.batcom-space--largeBottom.aem-GridColumn--default--12:nth-of-type(7)"
+            ".section.cmp-section--alignment-left.cmp-section--small-padding"
           ],
-          "style": "grey",
+          "style": "light",
           "blocks": [
-            "cards-topic"
+            "cards-drop"
           ],
-          "defaultContent": [
-            ".batcom-container.batcom-space--largeBottom.aem-GridColumn--default--12:nth-of-type(7) .batcom-text.text.batcom-space--smallBottom"
-          ]
+          "defaultContent": []
+        },
+        {
+          "id": "sec-all-access-rewards",
+          "name": "All Access Rewards banner",
+          "selector": [
+            ".cmp-section--background-img"
+          ],
+          "style": "accent",
+          "blocks": [
+            "teaser-stage"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-americas-1-vape",
+          "name": "America's #1 Vape — title + disclaimer",
+          "selector": [
+            ".headline.title.cmp-title--color-blue-gradient.cmp-title--align-center.cmp-title--large"
+          ],
+          "style": "light",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-simple-sleek-stylish",
+          "name": "Simple. Sleek. Stylish. — gallery-parallax feature band",
+          "selector": [
+            "section.cmp-gallery-parallax"
+          ],
+          "style": "dark",
+          "blocks": [
+            "teaser-stage"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-product-carousels",
+          "name": "Product carousels — Original & Pro flavor tiles",
+          "selector": [
+            "#carousel-exclude-pro.cmp-carousel",
+            "#carousel-include-pro.cmp-carousel"
+          ],
+          "style": "light",
+          "blocks": [
+            "cards-product"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-find-a-store",
+          "name": "Find A Store CTA",
+          "selector": [
+            "a[href='/store-locator.html']"
+          ],
+          "style": "light",
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "sec-transaction-teasers",
+          "name": "Transaction / promo teasers — Text Sign-Up, Offers, Store Locator",
+          "selector": [
+            ".section.cmp-section--no-padding .teaser.cmp-teaser--background-image-height-teaser"
+          ],
+          "style": "light",
+          "blocks": [
+            "teaser-transaction"
+          ],
+          "defaultContent": []
         }
       ]
     }

@@ -2,55 +2,48 @@
 /* global WebImporter */
 
 // PARSER IMPORTS
-import heroCarouselParser from './parsers/hero-carousel.js';
-import teaserPromoParser from './parsers/teaser-promo.js';
-import cardsTopicParser from './parsers/cards-topic.js';
+import heroVideoParser from './parsers/hero-video.js';
+import cardsDropParser from './parsers/cards-drop.js';
 import teaserStageParser from './parsers/teaser-stage.js';
-import columnsNewsroomParser from './parsers/columns-newsroom.js';
-import cardsNewsParser from './parsers/cards-news.js';
-import cardsPressParser from './parsers/cards-press.js';
-import tabsSpotlightParser from './parsers/tabs-spotlight.js';
-import embedVideoParser from './parsers/embed-video.js';
+import cardsProductParser from './parsers/cards-product.js';
+import teaserTransactionParser from './parsers/teaser-transaction.js';
 
 // TRANSFORMER IMPORTS
-import cleanupTransformer from './transformers/bat-cleanup.js';
-import sectionsTransformer from './transformers/bat-sections.js';
+import cleanupTransformer from './transformers/vuse-cleanup.js';
+import sectionsTransformer from './transformers/vuse-sections.js';
 
 // PARSER REGISTRY
 const parsers = {
-  'hero-carousel': heroCarouselParser,
-  'teaser-promo': teaserPromoParser,
-  'cards-topic': cardsTopicParser,
+  'hero-video': heroVideoParser,
+  'cards-drop': cardsDropParser,
   'teaser-stage': teaserStageParser,
-  'columns-newsroom': columnsNewsroomParser,
-  'cards-news': cardsNewsParser,
-  'cards-press': cardsPressParser,
-  'tabs-spotlight': tabsSpotlightParser,
-  'embed-video': embedVideoParser,
+  'cards-product': cardsProductParser,
+  'teaser-transaction': teaserTransactionParser,
 };
 
 // PAGE TEMPLATE CONFIGURATION - embedded from page-templates.json
 const PAGE_TEMPLATE = {
   name: 'home',
-  description: '',
-  urls: ['https://www.bat.com/'],
+  description: 'Vuse homepage',
+  urls: ['https://www.vusevapor.com/'],
   blocks: [
-    { name: 'hero-carousel', instances: ['.corp-hero-carousel.carousel'] },
-    { name: 'teaser-promo', instances: ['.corp-hero-carousel__experience-fragment'] },
-    { name: 'cards-topic', instances: ['.columncontrol__base.columncontrol__grid--lt4'] },
-    { name: 'teaser-stage', instances: ['.batcom-teaser.batcom-teaser-corp-stage'] },
-    { name: 'columns-newsroom', instances: ['.batcom-columncontrol.columncontrol--home.columncontrol--large-height'] },
-    { name: 'cards-news', instances: ['.batcom-list.batcom-layout--twoColumns.batcom-list--news-and-stories'] },
-    { name: 'cards-press', instances: ['.batcom-list.batcom-layout--oneColumn.batcom-list--news-and-stories'] },
-    { name: 'tabs-spotlight', instances: ['.batcom-tabs.tabs.panelcontainer'] },
-    { name: 'embed-video', instances: ['.batcom-video'] },
+    { name: 'hero-video', instances: ['.cmp-hero-banner--videoBackground'] },
+    { name: 'cards-drop', instances: ['.article-list.cmp-article-list__redesign'] },
+    { name: 'teaser-stage', instances: ['.cmp-section--background-img', 'section.cmp-gallery-parallax'] },
+    { name: 'cards-product', instances: ['#carousel-exclude-pro.cmp-carousel', '#carousel-include-pro.cmp-carousel'] },
+    { name: 'teaser-transaction', instances: ['.teaser.cmp-teaser--background-image-height-teaser'] },
   ],
   sections: [
-    { id: 'rc1c2c2', name: 'Hero carousel', selector: ['.batcom-container.batcom-container--full-page-width.batcom-container--noSpacing'], style: null, blocks: ['hero-carousel', 'teaser-promo'], defaultContent: [] },
-    { id: 'rc1c2c3', name: 'Our transformation', selector: ['.batcom-container.batcom-space--smallBottom.aem-GridColumn--laptop--none.aem-GridColumn--offset--laptop--0'], style: 'light', blocks: ['cards-topic', 'teaser-stage'], defaultContent: [] },
-    { id: 'rc1c2c5', name: 'Latest stories and features / Latest press releases', selector: ['.batcom-columncontrol.columncontrol--home.columncontrol--large-height'], style: 'dark', blocks: ['columns-newsroom', 'cards-news', 'cards-press'], defaultContent: [] },
-    { id: 'rc1c2c6', name: 'In the spotlight', selector: ['.batcom-container.batcom-container--background-full-page-width.batcom-container--primary-light'], style: 'grey', blocks: ['tabs-spotlight', 'embed-video'], defaultContent: [] },
-    { id: 'rc1c2c7', name: 'Latest results, reports and research', selector: ['.batcom-container.container.responsivegrid.batcom-space--largeBottom.aem-GridColumn--default--12:nth-of-type(7)'], style: 'grey', blocks: ['cards-topic'], defaultContent: [] },
+    { id: 'sec-hero-1', name: 'Hero — Vapor Done Right', selector: ['.cmp-hero-banner--videoBackground[id=\'627732359\']'], style: 'dark', blocks: ['hero-video'], defaultContent: [] },
+    { id: 'sec-hero-2', name: 'Hero #2', selector: ['.cmp-hero-banner--videoBackground[id=\'1120845041\']'], style: 'dark', blocks: ['hero-video'], defaultContent: [] },
+    { id: 'sec-find-your-flavor', name: 'Find Your Flavor CTA', selector: ['.button.cmp-button--vusePro-btn'], style: 'light', blocks: [], defaultContent: [] },
+    { id: 'sec-the-drop', name: 'The Drop', selector: ['.section.cmp-section--alignment-left.cmp-section--small-padding'], style: 'light', blocks: ['cards-drop'], defaultContent: [] },
+    { id: 'sec-all-access-rewards', name: 'All Access Rewards banner', selector: ['.cmp-section--background-img'], style: 'accent', blocks: ['teaser-stage'], defaultContent: [] },
+    { id: 'sec-americas-1-vape', name: 'America\'s #1 Vape', selector: ['.headline.title.cmp-title--color-blue-gradient.cmp-title--align-center.cmp-title--large'], style: 'light', blocks: [], defaultContent: [] },
+    { id: 'sec-simple-sleek-stylish', name: 'Simple. Sleek. Stylish.', selector: ['section.cmp-gallery-parallax'], style: 'dark', blocks: ['teaser-stage'], defaultContent: [] },
+    { id: 'sec-product-carousels', name: 'Product carousels', selector: ['#carousel-exclude-pro.cmp-carousel', '#carousel-include-pro.cmp-carousel'], style: 'light', blocks: ['cards-product'], defaultContent: [] },
+    { id: 'sec-find-a-store', name: 'Find A Store CTA', selector: ['a[href=\'/store-locator.html\']'], style: 'light', blocks: [], defaultContent: [] },
+    { id: 'sec-transaction-teasers', name: 'Transaction teasers', selector: ['.section.cmp-section--no-padding .teaser.cmp-teaser--background-image-height-teaser'], style: 'light', blocks: ['teaser-transaction'], defaultContent: [] },
   ],
 };
 

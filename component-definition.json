@@ -60,6 +60,45 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Drop Cards",
+          "id": "cards-drop",
+          "model": "cards-drop",
+          "filter": "cards-drop",
+          "plugins": {
+            "da": {
+              "name": "cards-drop",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Drop Card Item",
+          "id": "cards-drop-item",
+          "model": "cards-drop-item",
+          "plugins": {
+            "da": {
+              "name": "cards-drop-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "News Cards",
           "id": "cards-news",
           "model": "cards-news",
@@ -124,6 +163,45 @@
                 {
                   "name": "text",
                   "selector": "div:nth-child(1)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Product Cards",
+          "id": "cards-product",
+          "model": "cards-product",
+          "filter": "cards-product",
+          "plugins": {
+            "da": {
+              "name": "cards-product",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Product Card Item",
+          "id": "cards-product-item",
+          "model": "cards-product-item",
+          "plugins": {
+            "da": {
+              "name": "cards-product-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
                 }
               ]
             }
@@ -410,6 +488,32 @@
           }
         },
         {
+          "title": "Video Hero",
+          "id": "hero-video",
+          "model": "hero-video",
+          "plugins": {
+            "da": {
+              "name": "hero-video",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "video",
+                  "selector": "div>div:nth-child(1)>a[href]"
+                },
+                {
+                  "name": "image",
+                  "selector": "div>div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div>div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Hero",
           "id": "hero",
           "model": "hero",
@@ -598,6 +702,45 @@
                 {
                   "name": "text",
                   "selector": "div>div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Transaction Teasers",
+          "id": "teaser-transaction",
+          "model": "teaser-transaction",
+          "filter": "teaser-transaction",
+          "plugins": {
+            "da": {
+              "name": "teaser-transaction",
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
+          "title": "Transaction Teaser Item",
+          "id": "teaser-transaction-item",
+          "model": "teaser-transaction-item",
+          "plugins": {
+            "da": {
+              "name": "teaser-transaction-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>picture>img[alt]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
                 }
               ]
             }

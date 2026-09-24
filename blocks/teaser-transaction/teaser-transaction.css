@@ -1,0 +1,76 @@
+/* Transaction teasers – row of promo tiles: bg image + overlaid text + CTA */
+
+.teaser-transaction > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.teaser-transaction > ul > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 866 / 480;
+  min-height: 220px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 12px;
+}
+
+.teaser-transaction-image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  line-height: 0;
+}
+
+.teaser-transaction-image picture,
+.teaser-transaction-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teaser-transaction-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  color: #fff;
+  background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 20%) 60%, rgb(0 0 0 / 0%) 100%);
+}
+
+.teaser-transaction-body h1,
+.teaser-transaction-body h2,
+.teaser-transaction-body h3,
+.teaser-transaction-body h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.teaser-transaction-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+@media (width >= 600px) {
+  .teaser-transaction > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .teaser-transaction > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

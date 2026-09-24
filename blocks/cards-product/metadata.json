@@ -1,0 +1,10 @@
+{
+  "variantName": "cards-product",
+  "baseBlock": "cards",
+  "visualCharacteristics": "Scrollable row of product/flavor tiles (image + product name), snapping horizontally on mobile and a 4-up grid on desktop.",
+  "contentPattern": "One row per tile: product image cell + content cell (product/flavor name, optional link).",
+  "usage": "Product carousels (Original & Pro flavor tiles).",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["cards-product"]
+}

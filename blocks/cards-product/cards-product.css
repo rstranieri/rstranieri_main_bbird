@@ -1,0 +1,150 @@
+/* Product cards – horizontal carousel of product/flavor tiles */
+
+.cards-product {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.cards-product-viewport {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.cards-product-track {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0 1rem;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards-product-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.cards-product-track > li {
+  flex: 0 0 auto;
+  width: 70%;
+  max-width: 260px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.cards-product-image {
+  line-height: 0;
+}
+
+.cards-product-image picture,
+.cards-product-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+}
+
+.cards-product-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cards-product-body h1,
+.cards-product-body h2,
+.cards-product-body h3,
+.cards-product-body h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.cards-product-body p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* CTA links are long flavor names (e.g. "Classic Tobacco - Original Series").
+   The global button rule sets white-space: nowrap with wide side padding, which
+   clips them at the narrow tile width — allow the text to wrap and trim the
+   horizontal padding so the full name fits inside the button. */
+.cards-product-body a.button:any-link {
+  display: block;
+  width: 100%;
+  padding-inline: 16px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+/* Prev/next arrow controls */
+.cards-product-arrow {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--vuse-navy, #1b365d);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.cards-product-arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--vuse-navy, #1b365d);
+  border-bottom: 2px solid var(--vuse-navy, #1b365d);
+}
+
+.cards-product-arrow-prev::before {
+  transform: translate(-30%, -50%) rotate(135deg);
+}
+
+.cards-product-arrow-next::before {
+  transform: translate(-70%, -50%) rotate(-45deg);
+}
+
+.cards-product-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.cards-product-arrow:hover:not(:disabled) {
+  background: var(--vuse-navy, #1b365d);
+}
+
+.cards-product-arrow:hover:not(:disabled)::before {
+  border-color: #fff;
+}
+
+@media (width >= 600px) {
+  .cards-product-track > li {
+    width: 40%;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-product {
+    gap: 1rem;
+  }
+
+  .cards-product-track > li {
+    width: 260px;
+  }
+}

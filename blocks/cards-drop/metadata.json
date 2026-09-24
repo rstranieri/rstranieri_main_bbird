@@ -1,0 +1,10 @@
+{
+  "variantName": "cards-drop",
+  "baseBlock": "cards",
+  "visualCharacteristics": "Horizontal row of up to 5 square article/reward cards, each an image with a linked title beneath.",
+  "contentPattern": "One row per card: image cell + content cell (linked title).",
+  "usage": "\"The Drop\" reward/article card row.",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["cards-drop"]
+}

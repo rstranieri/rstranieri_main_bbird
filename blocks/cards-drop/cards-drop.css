@@ -1,0 +1,178 @@
+/* Drop cards – horizontal carousel of article/reward (quiz) image cards */
+
+.cards-drop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.cards-drop-viewport {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.cards-drop-track {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0 1.5rem;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards-drop-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.cards-drop-track > li {
+  flex: 0 0 auto;
+  width: 78%;
+  max-width: 322px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cards-drop-image {
+  line-height: 0;
+  position: relative;
+}
+
+/* Reward points badge (e.g. "+25 PTS") — amber tab pinned to the image top-right */
+.cards-drop-points {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 47px;
+  min-height: 48px;
+  padding: 4px;
+  border-radius: 0 0 7px 7px;
+  background-color: #ffb82f;
+  color: var(--vuse-navy, #1b365d);
+  font-family: var(--heading-font-family);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-align: center;
+}
+
+/* Category label (e.g. "Quiz"/"Poll") — pill pinned to the image bottom-left */
+.cards-drop-category {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 1;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 55%);
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cards-drop-image picture,
+.cards-drop-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.cards-drop-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cards-drop-body h1,
+.cards-drop-body h2,
+.cards-drop-body h3,
+.cards-drop-body h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.cards-drop-body p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Prev/next arrow controls */
+.cards-drop-arrow {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--vuse-navy, #1b365d);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.cards-drop-arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--vuse-navy, #1b365d);
+  border-bottom: 2px solid var(--vuse-navy, #1b365d);
+}
+
+.cards-drop-arrow-prev::before {
+  transform: translate(-30%, -50%) rotate(135deg);
+}
+
+.cards-drop-arrow-next::before {
+  transform: translate(-70%, -50%) rotate(-45deg);
+}
+
+.cards-drop-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.cards-drop-arrow:hover:not(:disabled) {
+  background: var(--vuse-navy, #1b365d);
+}
+
+.cards-drop-arrow:hover:not(:disabled)::before {
+  border-color: #fff;
+}
+
+@media (width >= 600px) {
+  .cards-drop-track > li {
+    width: 46%;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-drop {
+    gap: 1rem;
+  }
+
+  .cards-drop-track > li {
+    width: 322px;
+  }
+}

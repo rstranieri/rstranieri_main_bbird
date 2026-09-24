@@ -1,42 +1,56 @@
 /*
- * BAT.com brand tokens — extracted from https://www.bat.com/
- * Overrides the boilerplate "heritage" demo palette with BAT's corporate
- * navy-blue brand. Aeroport (BAT's proprietary self-hosted font) is not
- * redistributable; Montserrat (bundled) is used as the closest geometric-sans.
+ * Vuse brand tokens — extracted from the vusevapor.com homepage export.
+ * Vuse's brand font is Mundial, delivered via the site's own Adobe Fonts
+ * (Typekit) kit "hxh4btv" — imported below. Montserrat (bundled) remains the
+ * fallback if the kit fails to load. Palette: midnight/navy blues with a
+ * magenta accent and the signature metallic-silver button gradient.
  */
+@import url('https://use.typekit.net/hxh4btv.css');
 
 :root {
-  /* BAT brand palette */
-  --bat-navy: #0e2b63;
-  --bat-blue: #004f9f;
-  --bat-blue-bright: #1e6fc4;
-  --bat-grey: #f1f4f8;
-  --bat-grey-border: #d7dee8;
-  --bat-white: #fff;
+  /* Vuse brand palette */
+  --vuse-navy: #1b365d;
+  --vuse-midnight: #17223b;
+  --vuse-blue: #236192;
+  --vuse-blue-bright: #3d87cb;
+  --vuse-blue-deep: #294a93;
+  --vuse-magenta: #dc224e;
+  --vuse-grey: #f9f9f9;
+  --vuse-grey-border: #dfe3e8;
+  --vuse-white: #fff;
+
+  /* Signature metallic-silver button gradient (chrome look) */
+  --vuse-btn-silver: linear-gradient(90.21deg, #90969e 0.18%, #bec4cd 20.15%, #fff 60.07%, #bec4cd 79.9%, #90969e 100%);
 
   /* Map brand tokens onto the design-system variables blocks inherit */
-  --heading-font-family: montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
-  --body-font-family: montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
-  --background-color: var(--bat-white);
-  --text-color: var(--bat-navy);
-  --link-color: var(--bat-navy);
-  --link-hover-color: var(--bat-blue);
+  --heading-font-family: mundial, montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
+  --body-font-family: mundial, montserrat, -apple-system, "Segoe UI", roboto, sans-serif;
+  --background-color: var(--vuse-white);
+  --text-color: var(--vuse-navy);
+  --link-color: var(--vuse-blue);
+  --link-hover-color: var(--vuse-blue-bright);
 
-  /* Re-point heritage palette tokens the boilerplate blocks reference so
-     legacy blocks also pick up BAT colors. */
-  --color-ink: var(--bat-navy);
-  --color-rust: var(--bat-blue);
-  --color-rust-bright: var(--bat-blue-bright);
-  --color-gold: var(--bat-blue-bright);
-  --color-parchment: var(--bat-white);
-  --color-obsidian: var(--bat-navy);
-  --color-card-dark: #12275a;
+  /* Re-point legacy/boilerplate palette tokens so all blocks pick up Vuse colors.
+     (Kept the --bat-* names too so blocks authored against them still resolve.) */
+  --bat-navy: var(--vuse-navy);
+  --bat-blue: var(--vuse-blue);
+  --bat-blue-bright: var(--vuse-blue-bright);
+  --bat-grey: var(--vuse-grey);
+  --bat-grey-border: var(--vuse-grey-border);
+  --bat-white: var(--vuse-white);
+  --color-ink: var(--vuse-navy);
+  --color-rust: var(--vuse-blue);
+  --color-rust-bright: var(--vuse-blue-bright);
+  --color-gold: var(--vuse-magenta);
+  --color-parchment: var(--vuse-white);
+  --color-obsidian: var(--vuse-midnight);
+  --color-card-dark: #22304d;
   --color-muted: #c8d2e2;
 
   /* heading sizes (desktop) */
-  --heading-size-xxl: 36px;
+  --heading-size-xxl: 44px;
   --heading-size-xl: 36px;
-  --heading-size-l: 22px;
+  --heading-size-l: 26px;
   --heading-size-m: 22px;
   --heading-size-s: 18px;
   --heading-size-xs: 16px;

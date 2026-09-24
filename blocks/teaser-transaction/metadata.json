@@ -1,0 +1,10 @@
+{
+  "variantName": "teaser-transaction",
+  "baseBlock": "teaser",
+  "visualCharacteristics": "Row of up to 4 promo tiles, each a background image with overlaid heading/text and a call-to-action over a bottom gradient scrim.",
+  "contentPattern": "One row per tile: background image cell + content cell (heading, text, CTA).",
+  "usage": "Transaction promo row (Text Sign-Up, Offers, Store Locator).",
+  "canonicalModel": "container-items",
+  "options": [],
+  "memberVariantIds": ["teaser-transaction"]
+}

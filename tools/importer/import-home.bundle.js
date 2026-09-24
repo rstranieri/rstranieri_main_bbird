@@ -41,494 +41,321 @@ var CustomImportScript = (() => {
     default: () => import_home_default
   });
 
-  // tools/importer/parsers/hero-carousel.js
+  // tools/importer/parsers/hero-video.js
   function parse(element, { document: document2 }) {
+    var _a;
     const c = (name) => document2.createComment(` field:${name} `);
-    const imageSwiper = element.querySelector(".corp-hero-carousel__image-swiper .swiper-wrapper");
-    const imageSlides = imageSwiper ? [...imageSwiper.children].filter((s) => s.querySelector("img")) : [...element.querySelectorAll(".corp-hero-carousel__image-image")].map((img) => img);
-    const contentSwiper = element.querySelector(".corp-hero-carousel__teaser__content-swiper .swiper-wrapper");
-    const contentSlides = contentSwiper ? [...contentSwiper.children] : [...element.querySelectorAll(".corp-hero-carousel__teaser__title")].map((h) => h.closest("div"));
-    const count = Math.max(imageSlides.length, contentSlides.length);
-    const cells = [];
-    for (let i = 0; i < count; i += 1) {
-      const imgSlide = imageSlides[i];
-      const contentSlide = contentSlides[i];
-      const img = imgSlide ? imgSlide.tagName === "IMG" ? imgSlide : imgSlide.querySelector("img") : null;
-      const heading = contentSlide && contentSlide.querySelector(".corp-hero-carousel__teaser__title, h1, h2, h3");
-      const description = contentSlide && contentSlide.querySelector(".corp-hero-carousel__teaser__description, p");
-      const link = contentSlide && contentSlide.querySelector("a[href]");
-      if (!img && !heading && !description) continue;
-      const cell = [];
-      if (img) cell.push(c("image"), img);
-      if (heading) {
-        const h = document2.createElement("h2");
-        h.textContent = heading.textContent.trim();
-        cell.push(c("heading"), h);
-      }
-      if (description) {
-        const p = document2.createElement("p");
-        p.textContent = description.textContent.trim();
-        cell.push(c("text"), p);
-      }
-      if (link) {
-        const a = document2.createElement("a");
-        a.setAttribute("href", link.getAttribute("href"));
-        a.textContent = link.textContent.trim();
-        cell.push(c("link"), a);
-      }
-      cells.push([cell]);
-    }
-    if (!cells.length) {
+    const desktopSource = element.querySelector(
+      'video.cmp-hero-banner__video-background__video--desktop source[src], source[src*=".mp4"]'
+    );
+    const anyMp4 = element.querySelector('source[src*=".mp4"], a[href*=".mp4"]');
+    const videoUrl = desktopSource && desktopSource.getAttribute("src") || anyMp4 && (anyMp4.getAttribute("src") || anyMp4.getAttribute("href")) || "";
+    const posterImg = element.querySelector(".cmp-hero-banner__poster img, picture img, img");
+    const headlineSpan = element.querySelector(".cmp-hero-banner__headline1[data-text], .cmp-hero-banner__headline1");
+    const headlineText = headlineSpan ? (headlineSpan.getAttribute("data-text") || headlineSpan.textContent || "").trim() : (((_a = element.querySelector("h1, .cmp-hero-banner__headline")) == null ? void 0 : _a.textContent) || "").trim();
+    const cta = element.querySelector('.cmp-hero-banner__ctas a[href], a.cmp-button[href], a[role="button"][href]');
+    if (!videoUrl && !posterImg && !headlineText) {
       element.replaceWith(...element.childNodes);
       return;
     }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "hero-carousel", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/teaser-promo.js
-  function parse2(element, { document: document2 }) {
-    const c = (name) => document2.createComment(` field:${name} `);
-    const img = element.querySelector("img");
-    const eyebrow = element.querySelector(".hero-carousel-xf-override span, .small");
-    const textCells = [...element.querySelectorAll(".cmp-text > p, .cmp-text > h3")];
-    const bodyHeading = element.querySelector("h3");
-    const link = element.querySelector("a[href]:not(.cmp-image__link)") || element.querySelector("a[href]");
-    const contentCell = [];
-    const seen = /* @__PURE__ */ new Set();
-    if (eyebrow) {
-      const text = eyebrow.textContent.trim();
-      const p = document2.createElement("p");
-      p.textContent = text;
-      contentCell.push(p);
-      seen.add(text);
+    const mediaCell = [c("image")];
+    if (posterImg) mediaCell.push(posterImg);
+    const contentCell = [c("text")];
+    if (headlineText) {
+      const h1 = document2.createElement("h1");
+      h1.textContent = headlineText;
+      contentCell.push(h1);
     }
-    textCells.forEach((el) => {
-      const text = el.textContent.trim();
-      if (!text) return;
-      if (el.querySelector && el.querySelector("a")) return;
-      if (bodyHeading && el === bodyHeading) return;
-      if (seen.has(text)) return;
-      seen.add(text);
-      const p = document2.createElement("p");
-      p.textContent = text;
-      contentCell.push(p);
-    });
-    if (bodyHeading && bodyHeading.textContent.trim()) {
-      const h = document2.createElement("h3");
-      h.textContent = bodyHeading.textContent.trim();
-      contentCell.push(h);
-    }
-    if (link) {
+    if (cta && cta.getAttribute("href")) {
       const p = document2.createElement("p");
       const a = document2.createElement("a");
-      a.setAttribute("href", link.getAttribute("href"));
-      a.textContent = link.textContent.trim() || "Register now";
+      a.setAttribute("href", cta.getAttribute("href"));
+      a.textContent = (cta.textContent || "").trim() || cta.getAttribute("aria-label") || "Learn More";
       p.append(a);
       contentCell.push(p);
     }
-    if (!img && !contentCell.length) {
-      element.replaceWith(...element.childNodes);
-      return;
-    }
-    const imageCell = [];
-    if (img) imageCell.push(c("image"), img);
-    const cells = [[imageCell, [c("text"), ...contentCell]]];
-    const block = WebImporter.Blocks.createBlock(document2, { name: "teaser-promo", cells });
+    const cells = [[mediaCell], [contentCell]];
+    const block = WebImporter.Blocks.createBlock(document2, { name: "hero-video", cells });
+    if (videoUrl) block.setAttribute("data-video", videoUrl);
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/cards-topic.js
-  function parse3(element, { document: document2 }) {
+  // tools/importer/parsers/cards-drop.js
+  function parse2(element, { document: document2 }) {
     const c = (name) => document2.createComment(` field:${name} `);
     const buildCardRow = (card) => {
-      const img = card.querySelector(".cmp-teaser__image img, img");
-      const pretitle = card.querySelector(".cmp-teaser__pretitle");
-      const heading = card.querySelector(".cmp-teaser__title, h1, h2, h3, h4");
-      const description = card.querySelector(".cmp-teaser__description");
-      const link = card.querySelector(".cmp-teaser__action-link, a[href]");
+      const img = card.querySelector(".article-teaser__image img, img");
+      const titleLink = card.querySelector(".article-teaser__title-link, .article-teaser__title a[href]");
+      const description = card.querySelector(".article-teaser__description");
+      const actionLink = card.querySelector(".article-teaser__action-link");
       const contentCell = [c("text")];
-      if (pretitle && pretitle.textContent.trim()) {
+      if (titleLink && (titleLink.textContent || "").trim()) {
+        const h3 = document2.createElement("h3");
+        const a = document2.createElement("a");
+        a.setAttribute("href", titleLink.getAttribute("href"));
+        a.textContent = titleLink.textContent.trim();
+        h3.append(a);
+        contentCell.push(h3);
+      }
+      if (description && (description.textContent || "").trim()) {
         const p = document2.createElement("p");
-        p.textContent = pretitle.textContent.trim();
+        p.textContent = description.textContent.trim();
         contentCell.push(p);
       }
-      if (heading && heading.textContent.trim()) {
-        const h = document2.createElement("h3");
-        h.textContent = heading.textContent.trim();
-        contentCell.push(h);
-      }
-      if (description) {
-        [...description.querySelectorAll("p")].forEach((p) => {
-          if (p.textContent.trim()) {
-            const np = document2.createElement("p");
-            np.textContent = p.textContent.trim();
-            contentCell.push(np);
-          }
-        });
-        if (!description.querySelector("p") && description.textContent.trim()) {
-          const p = document2.createElement("p");
-          p.textContent = description.textContent.trim();
-          contentCell.push(p);
-        }
-      }
-      if (link && link.getAttribute("href")) {
+      if (actionLink && actionLink.getAttribute("href")) {
         const p = document2.createElement("p");
         const a = document2.createElement("a");
-        a.setAttribute("href", link.getAttribute("href"));
-        a.textContent = link.textContent.trim();
+        a.setAttribute("href", actionLink.getAttribute("href"));
+        a.textContent = (actionLink.textContent || "").trim() || "Read More";
         p.append(a);
         contentCell.push(p);
       }
+      if (!img && contentCell.length === 1) return null;
       const imageCell = [];
       if (img) imageCell.push(c("image"), img);
-      if (!img && contentCell.length === 1) return null;
       return [imageCell, contentCell];
     };
-    let cards = [...element.querySelectorAll(".batcom-teaser-corp--vertical")];
+    let cards = [...element.querySelectorAll(".article-teaser")];
+    if (!cards.length) cards = [...element.querySelectorAll(".glide__slide, li")];
     if (!cards.length) cards = [element];
     const cells = cards.map(buildCardRow).filter(Boolean);
     if (!cells.length) {
       element.replaceWith(...element.childNodes);
       return;
     }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-topic", cells });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-drop", cells });
     element.replaceWith(block);
   }
 
   // tools/importer/parsers/teaser-stage.js
-  function parse4(element, { document: document2 }) {
+  function parse3(element, { document: document2 }) {
     const c = (name) => document2.createComment(` field:${name} `);
-    const img = element.querySelector(".cmp-teaser__image img, img");
-    const pretitle = element.querySelector(".cmp-teaser__pretitle");
-    const heading = element.querySelector(".cmp-teaser__title, h1, h2, h3, h4");
-    const description = element.querySelector(".cmp-teaser__description");
-    const link = element.querySelector(".cmp-teaser__action-link, a[href]");
-    const contentCell = [c("text")];
-    if (pretitle && pretitle.textContent.trim()) {
-      const p = document2.createElement("p");
-      p.textContent = pretitle.textContent.trim();
-      contentCell.push(p);
-    }
-    if (heading && heading.textContent.trim()) {
-      const h = document2.createElement("h2");
-      h.textContent = heading.textContent.trim();
-      contentCell.push(h);
-    }
-    if (description) {
-      [...description.querySelectorAll("p")].forEach((p) => {
-        if (p.textContent.trim()) {
-          const np = document2.createElement("p");
-          np.textContent = p.textContent.trim();
-          contentCell.push(np);
-        }
-      });
-      if (!description.querySelector("p") && description.textContent.trim()) {
-        const p = document2.createElement("p");
-        p.textContent = description.textContent.trim();
-        contentCell.push(p);
+    const clean = (s) => (s || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+    let img = element.querySelector(".cmp-section__background-picture img, .cmp-section__background-img");
+    if (!img) {
+      const parallaxImg = element.querySelector(".cmp-gallery-parallax__img[data-desktop-image], .cmp-gallery-parallax__img[data-mobile-image]");
+      const bgUrl = parallaxImg && (parallaxImg.getAttribute("data-desktop-image") || parallaxImg.getAttribute("data-mobile-image"));
+      if (bgUrl) {
+        img = document2.createElement("img");
+        img.setAttribute("src", bgUrl);
+        img.setAttribute("alt", "");
       }
     }
-    if (link && link.getAttribute("href")) {
-      const p = document2.createElement("p");
-      const a = document2.createElement("a");
-      a.setAttribute("href", link.getAttribute("href"));
-      a.textContent = link.textContent.trim();
-      p.append(a);
-      contentCell.push(p);
-    }
-    if (!img && contentCell.length === 1) {
+    const headingEl = element.querySelector(
+      ".cmp-gallery-parallax__caption-title, .cmp-text h1, .cmp-text h2, h1, h2, h3"
+    );
+    const headingText = headingEl ? clean(headingEl.textContent) : "";
+    const descTexts = [];
+    const seen = /* @__PURE__ */ new Set();
+    const descNodes = element.querySelectorAll(
+      ".cmp-gallery-parallax__caption-description, .cmp-text p"
+    );
+    descNodes.forEach((p) => {
+      const t = clean(p.textContent);
+      if (!t) return;
+      if (seen.has(t)) return;
+      if (headingText && t === headingText) return;
+      seen.add(t);
+      descTexts.push(t);
+    });
+    const cta = element.querySelector('.cmp-button a[href], a[role="button"][href], .cmp-teaser__action-link[href]');
+    if (!img && !headingText && !descTexts.length) {
       element.replaceWith(...element.childNodes);
       return;
     }
     const imageCell = [];
     if (img) imageCell.push(c("image"), img);
+    const contentCell = [c("text")];
+    if (headingText) {
+      const h = document2.createElement("h2");
+      h.textContent = headingText;
+      contentCell.push(h);
+    }
+    descTexts.forEach((t) => {
+      const p = document2.createElement("p");
+      p.textContent = t;
+      contentCell.push(p);
+    });
+    if (cta && cta.getAttribute("href")) {
+      const p = document2.createElement("p");
+      const a = document2.createElement("a");
+      a.setAttribute("href", cta.getAttribute("href"));
+      a.textContent = clean(cta.textContent) || cta.getAttribute("aria-label") || "Learn More";
+      p.append(a);
+      contentCell.push(p);
+    }
     const cells = [[imageCell, contentCell]];
     const block = WebImporter.Blocks.createBlock(document2, { name: "teaser-stage", cells });
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/columns-newsroom.js
-  function parse5(element, { document: document2 }) {
-    const columns = [...element.querySelectorAll(".columncontrol__column")];
-    const buildColumn = (col) => {
-      const content = [];
-      const title = col.querySelector(".cmp-title__text, .cmp-title h1, .cmp-title h2, .cmp-title h3");
-      if (title && title.textContent.trim()) {
-        const h = document2.createElement("h2");
-        h.textContent = title.textContent.trim();
-        content.push(h);
+  // tools/importer/parsers/cards-product.js
+  function parse4(element, { document: document2 }) {
+    const c = (name) => document2.createComment(` field:${name} `);
+    const buildTileRow = (slide) => {
+      const imageCmp = slide.querySelector(".cmp-image");
+      const link = slide.querySelector("a.cmp-image__link[href], a[href]");
+      const name = imageCmp && imageCmp.getAttribute("data-title") || link && link.getAttribute("aria-label") || "";
+      let imgEl = slide.querySelector("picture img, img");
+      if (!imgEl) {
+        const src = imageCmp && imageCmp.getAttribute("data-asset") || slide.querySelector("picture source[srcset]") && slide.querySelector("picture source[srcset]").getAttribute("srcset") || "";
+        if (src) {
+          imgEl = document2.createElement("img");
+          imgEl.setAttribute("src", src.split(",")[0].trim().split(" ")[0]);
+          imgEl.setAttribute("alt", name.trim());
+        }
+      } else if (name.trim() && !imgEl.getAttribute("alt")) {
+        imgEl.setAttribute("alt", name.trim());
       }
-      const items = [...col.querySelectorAll("li.cmp-list__item")];
-      items.forEach((item) => {
-        const tag = item.querySelector(".cmp-list__item-tag");
-        const date = item.querySelector(".cmp-list__item-date");
-        const heading = item.querySelector(".cmp-list__item-title, h1, h2, h3, h4");
-        const description = item.querySelector(".cmp-list__item-description");
-        const link = item.querySelector("a.cmp-list__item-link[href], a[href]");
-        const metaParts = [];
-        if (tag && tag.textContent.trim()) metaParts.push(tag.textContent.trim());
-        if (date && date.textContent.trim()) metaParts.push(date.textContent.trim());
-        if (metaParts.length) {
-          const p = document2.createElement("p");
-          p.textContent = metaParts.join(" | ");
-          content.push(p);
+      const contentCell = [c("text")];
+      if (name.trim()) {
+        const p = document2.createElement("p");
+        if (link && link.getAttribute("href")) {
+          const a = document2.createElement("a");
+          a.setAttribute("href", link.getAttribute("href"));
+          a.textContent = name.trim();
+          p.append(a);
+        } else {
+          p.textContent = name.trim();
         }
-        if (heading && heading.textContent.trim()) {
-          const h = document2.createElement("h4");
-          if (link && link.getAttribute("href")) {
-            const a = document2.createElement("a");
-            a.setAttribute("href", link.getAttribute("href"));
-            a.textContent = heading.textContent.trim();
-            h.append(a);
-          } else {
-            h.textContent = heading.textContent.trim();
-          }
-          content.push(h);
-        }
-        if (description && description.textContent.trim()) {
-          const p = document2.createElement("p");
-          p.textContent = description.textContent.trim();
-          content.push(p);
-        }
-      });
-      return content;
+        contentCell.push(p);
+      }
+      if (!imgEl && contentCell.length === 1) return null;
+      const imageCell = [];
+      if (imgEl) imageCell.push(c("image"), imgEl);
+      return [imageCell, contentCell];
     };
-    const cells = [];
-    if (columns.length) {
-      cells.push(columns.map((col) => buildColumn(col)));
-    }
-    if (!cells.length || cells[0].every((cell) => !cell.length)) {
+    let slides = [...element.querySelectorAll(".cmp-carousel-slide")];
+    if (!slides.length) slides = [...element.querySelectorAll("li")];
+    if (!slides.length) slides = [element];
+    const cells = slides.map(buildTileRow).filter(Boolean);
+    if (!cells.length) {
       element.replaceWith(...element.childNodes);
       return;
     }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-newsroom", cells });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-product", cells });
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/cards-news.js
-  function parse6(element, { document: document2 }) {
+  // tools/importer/parsers/teaser-transaction.js
+  function parse5(element, { document: document2 }) {
     const c = (name) => document2.createComment(` field:${name} `);
-    const items = [...element.querySelectorAll("li.cmp-list__item")];
-    const cells = [];
-    items.forEach((item) => {
-      const img = item.querySelector(".cmp-list__item-image img, img");
-      const tag = item.querySelector(".cmp-list__item-tag");
-      const date = item.querySelector(".cmp-list__item-date");
-      const heading = item.querySelector(".cmp-list__item-title, h1, h2, h3, h4");
-      const description = item.querySelector(".cmp-list__item-description");
+    const clean = (s) => (s || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+    const buildTileRow = (tile) => {
+      const img = tile.querySelector(".cmp-teaser__background-picture img, .cmp-teaser__background-img, picture img");
+      const heading = tile.querySelector(".cmp-teaser__title, h1, h2, h3, h4");
+      const description = tile.querySelector(".cmp-teaser__description");
+      const cta = tile.querySelector(".cmp-teaser__action-link[href], a[href]");
+      const headingText = heading ? clean(heading.textContent) : "";
       const contentCell = [c("text")];
-      const metaParts = [];
-      if (tag && tag.textContent.trim()) metaParts.push(tag.textContent.trim());
-      if (date && date.textContent.trim()) metaParts.push(date.textContent.trim());
-      if (metaParts.length) {
-        const p = document2.createElement("p");
-        p.textContent = metaParts.join(" | ");
-        contentCell.push(p);
-      }
-      if (heading && heading.textContent.trim()) {
-        const h = document2.createElement("h4");
-        h.textContent = heading.textContent.trim();
+      if (headingText) {
+        const h = document2.createElement("h3");
+        h.textContent = headingText;
         contentCell.push(h);
       }
-      if (description && description.textContent.trim()) {
+      if (description) {
+        const paras = [...description.querySelectorAll("p")];
+        if (paras.length) {
+          paras.forEach((p) => {
+            const t = clean(p.textContent);
+            if (t) {
+              const np = document2.createElement("p");
+              np.textContent = t;
+              contentCell.push(np);
+            }
+          });
+        } else {
+          const t = clean(description.textContent);
+          if (t) {
+            const np = document2.createElement("p");
+            np.textContent = t;
+            contentCell.push(np);
+          }
+        }
+      }
+      if (cta && cta.getAttribute("href")) {
         const p = document2.createElement("p");
-        p.textContent = description.textContent.trim();
+        const a = document2.createElement("a");
+        a.setAttribute("href", cta.getAttribute("href"));
+        a.textContent = clean(cta.textContent) || "Learn More";
+        p.append(a);
         contentCell.push(p);
       }
-      if (contentCell.length === 1 && !img) return;
+      if (!img && contentCell.length === 1) return null;
       const imageCell = [];
       if (img) imageCell.push(c("image"), img);
-      cells.push([imageCell, contentCell]);
-    });
+      return [imageCell, contentCell];
+    };
+    let tiles = [...element.querySelectorAll(".cmp-teaser")];
+    if (!tiles.length) tiles = [element];
+    const cells = tiles.map(buildTileRow).filter(Boolean);
     if (!cells.length) {
       element.replaceWith(...element.childNodes);
       return;
     }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-news", cells });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "teaser-transaction", cells });
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/cards-press.js
-  function parse7(element, { document: document2 }) {
-    const c = (name) => document2.createComment(` field:${name} `);
-    const items = [...element.querySelectorAll("li.cmp-list__item")];
-    const cells = [];
-    items.forEach((item) => {
-      const tag = item.querySelector(".cmp-list__item-tag");
-      const date = item.querySelector(".cmp-list__item-date");
-      const heading = item.querySelector(".cmp-list__item-title, h1, h2, h3, h4");
-      const description = item.querySelector(".cmp-list__item-description");
-      const contentCell = [c("text")];
-      const metaParts = [];
-      if (tag && tag.textContent.trim()) metaParts.push(tag.textContent.trim());
-      if (date && date.textContent.trim()) metaParts.push(date.textContent.trim());
-      if (metaParts.length) {
-        const p = document2.createElement("p");
-        p.textContent = metaParts.join(" | ");
-        contentCell.push(p);
-      }
-      if (heading && heading.textContent.trim()) {
-        const h = document2.createElement("h4");
-        h.textContent = heading.textContent.trim();
-        contentCell.push(h);
-      }
-      if (description && description.textContent.trim()) {
-        const p = document2.createElement("p");
-        p.textContent = description.textContent.trim();
-        contentCell.push(p);
-      }
-      if (contentCell.length === 1) return;
-      cells.push([contentCell]);
-    });
-    if (!cells.length) {
-      element.replaceWith(...element.childNodes);
-      return;
-    }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-press", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/tabs-spotlight.js
-  function parse8(element, { document: document2 }) {
-    const c = (name) => document2.createComment(` field:${name} `);
-    const labels = [...element.querySelectorAll(".cmp-tabs__tablist > li.cmp-tabs__tab")];
-    const panels = [...element.querySelectorAll(".cmp-tabs__tabpanel")];
-    const count = Math.max(labels.length, panels.length);
-    const cells = [];
-    for (let i = 0; i < count; i += 1) {
-      const labelEl = labels[i];
-      const panel = panels[i];
-      const label = labelEl ? labelEl.textContent.trim() : `Tab ${i + 1}`;
-      const contentCell = [c("content")];
-      if (panel) {
-        const video = panel.querySelector(".batcom-video");
-        const scope = video || panel;
-        const pretitle = scope.querySelector(".batcom-video__info-pre-title, .batcom-video__text--pretitle");
-        const title = scope.querySelector(".batcom-video__info-title, .batcom-video__title, h1, h2, h3, h4");
-        const description = scope.querySelector(".batcom-video__info-text p, .batcom-video__text--description, p");
-        const videoEl = scope.querySelector("video[src], source[src]");
-        const videoSrc = videoEl ? videoEl.getAttribute("src") : "";
-        if (pretitle && pretitle.textContent.trim()) {
-          const p = document2.createElement("p");
-          p.textContent = pretitle.textContent.trim();
-          contentCell.push(p);
-        }
-        if (title && title.textContent.trim()) {
-          const h = document2.createElement("h3");
-          h.textContent = title.textContent.trim();
-          contentCell.push(h);
-        }
-        if (description && description.textContent.trim()) {
-          const p = document2.createElement("p");
-          p.textContent = description.textContent.trim();
-          contentCell.push(p);
-        }
-        if (videoSrc) {
-          const p = document2.createElement("p");
-          const a = document2.createElement("a");
-          a.setAttribute("href", videoSrc);
-          a.textContent = title && title.textContent.trim() || "Watch video";
-          p.append(a);
-          contentCell.push(p);
-        }
-      }
-      cells.push([[c("label"), document2.createTextNode(label)], contentCell]);
-    }
-    if (!cells.length) {
-      element.replaceWith(...element.childNodes);
-      return;
-    }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "tabs-spotlight", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/embed-video.js
-  function parse9(element, { document: document2 }) {
-    const c = (name) => document2.createComment(` field:${name} `);
-    const poster = element.querySelector(".batcom-video__info img, picture img, img");
-    const title = element.querySelector(".batcom-video__title, .batcom-video__info-title, h1, h2, h3, h4");
-    const pretitle = element.querySelector(".batcom-video__text--pretitle, .batcom-video__info-pre-title");
-    const description = element.querySelector(".batcom-video__text--description, .batcom-video__info-text p");
-    const videoEl = element.querySelector("video[src], source[src]");
-    const linkEl = element.querySelector("a[href]");
-    const videoSrc = videoEl ? videoEl.getAttribute("src") : linkEl ? linkEl.getAttribute("href") : "";
-    const titleText = title ? title.textContent.trim() : "";
-    const contentCell = [c("text")];
-    if (pretitle && pretitle.textContent.trim()) {
-      const p = document2.createElement("p");
-      p.textContent = pretitle.textContent.trim();
-      contentCell.push(p);
-    }
-    if (titleText) {
-      const h = document2.createElement("h3");
-      h.textContent = titleText;
-      contentCell.push(h);
-    }
-    if (description && description.textContent.trim()) {
-      const p = document2.createElement("p");
-      p.textContent = description.textContent.trim();
-      contentCell.push(p);
-    }
-    if (videoSrc) {
-      const p = document2.createElement("p");
-      const a = document2.createElement("a");
-      a.setAttribute("href", videoSrc);
-      a.textContent = titleText || "Watch video";
-      p.append(a);
-      contentCell.push(p);
-    }
-    if (!videoSrc && contentCell.length === 1) {
-      element.replaceWith(...element.childNodes);
-      return;
-    }
-    const imageCell = [];
-    if (poster) imageCell.push(c("image"), poster);
-    const cells = [[imageCell, contentCell]];
-    const block = WebImporter.Blocks.createBlock(document2, { name: "embed-video", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/transformers/bat-cleanup.js
-  var TransformHook = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
+  // tools/importer/transformers/vuse-cleanup.js
+  var TransformHook = {
+    beforeTransform: "beforeTransform",
+    afterTransform: "afterTransform"
+  };
   function transform(hookName, element, payload) {
     if (hookName === TransformHook.beforeTransform) {
       WebImporter.DOMUtils.remove(element, [
-        "#onetrust-consent-sdk",
-        "#onetrust-banner-sdk",
-        "#onetrust-pc-sdk",
-        ".onetrust-pc-dark-filter",
-        // Flyout/search close buttons leave stray "Close" text in content.
-        ".batcom-flyout__closebutton",
-        ".corp-search-bar__close"
+        // Modal disruptor popup (cleaned.html: 4954 xf wrapper, 4972 grid col, cmp-modal-disruptor)
+        ".cmp-experiencefragment--modal-disruptor",
+        ".modal-disruptor",
+        ".cmp-modal-disruptor",
+        // Tobacco-preferences update reminder modal + its survey form (4499 grid col, 4884 <form>)
+        ".tobacco-preferences-update-reminder",
+        ".cmp-tobacco-preferences-update-reminder",
+        ".cmp-form",
+        // Camera capture modal used by the loyalty code-entry widget (780)
+        ".cmp-camera"
       ]);
     }
     if (hookName === TransformHook.afterTransform) {
       WebImporter.DOMUtils.remove(element, [
-        // Global header / mega-nav (header XF + header element + nav)
-        ".cmp-experiencefragment--header",
-        "header.batcom-header",
-        "nav.cmp-navigationcorp",
-        // Breadcrumb
-        "nav.cmp-breadcrumb",
-        // Header search widget
-        ".batcom-search",
-        // Global footer (footer XF)
+        // Global header / navigation (cleaned.html: 368 <header>, 371 .cmp-header, 392 .cmp-navigation)
+        "header",
+        ".cmp-header",
+        ".cmp-navigation",
+        // Footer (4140 .cmp-experiencefragment--footer, 4166 .cmp-footer)
+        "footer",
         ".cmp-experiencefragment--footer",
-        // Live UK share-price ticker (homepage + footer variants)
-        ".batcom-shareprice--home",
-        ".batcom-shareprice",
-        // Scripts, styles, links and other non-authorable noise
+        ".cmp-footer",
+        // Surgeon general warning / announcement bars (137, 169 announcement-flavors, 188 .cmp-announcement)
+        ".surgeon-general-warning",
+        ".cmp-surgeon-general-warning",
+        ".cmp-announcement",
+        // Authenticated-container membership UI wrapper (336 .authenticated-container, 340 .cmp-authenticated-container)
+        ".authenticated-container",
+        ".cmp-authenticated-container",
+        // Loyalty Plus widgets (3925 enrollment, 488 rewardstatus, 479 rewardscontainer, 839 activity-feed, 705 codeentry)
+        ".cmp-lplus-enrollment",
+        ".cmp-lplus-rewardstatus",
+        ".cmp-lplus-bonus",
+        ".cmp-lplus-codeentry",
+        ".rewardscontainer",
+        ".cmp-activity-feed",
+        // Safe non-authorable noise (none present in this page, kept for other pages on the same site)
         "script",
         "style",
         "noscript",
         "iframe",
         "link"
       ]);
+      element.querySelectorAll("[data-cmp-data-layer], [data-cmp-clickable]").forEach((el) => {
+        el.removeAttribute("data-cmp-data-layer");
+        el.removeAttribute("data-cmp-clickable");
+      });
     }
   }
 
-  // tools/importer/transformers/bat-sections.js
+  // tools/importer/transformers/vuse-sections.js
   var SECTION_MARKER_ATTR = "data-excat-section-id";
   function querySection(root, selectors) {
     for (const sel of selectors) {
@@ -572,37 +399,34 @@ var CustomImportScript = (() => {
 
   // tools/importer/import-home.js
   var parsers = {
-    "hero-carousel": parse,
-    "teaser-promo": parse2,
-    "cards-topic": parse3,
-    "teaser-stage": parse4,
-    "columns-newsroom": parse5,
-    "cards-news": parse6,
-    "cards-press": parse7,
-    "tabs-spotlight": parse8,
-    "embed-video": parse9
+    "hero-video": parse,
+    "cards-drop": parse2,
+    "teaser-stage": parse3,
+    "cards-product": parse4,
+    "teaser-transaction": parse5
   };
   var PAGE_TEMPLATE = {
     name: "home",
-    description: "",
-    urls: ["https://www.bat.com/"],
+    description: "Vuse homepage",
+    urls: ["https://www.vusevapor.com/"],
     blocks: [
-      { name: "hero-carousel", instances: [".corp-hero-carousel.carousel"] },
-      { name: "teaser-promo", instances: [".corp-hero-carousel__experience-fragment"] },
-      { name: "cards-topic", instances: [".columncontrol__base.columncontrol__grid--lt4"] },
-      { name: "teaser-stage", instances: [".batcom-teaser.batcom-teaser-corp-stage"] },
-      { name: "columns-newsroom", instances: [".batcom-columncontrol.columncontrol--home.columncontrol--large-height"] },
-      { name: "cards-news", instances: [".batcom-list.batcom-layout--twoColumns.batcom-list--news-and-stories"] },
-      { name: "cards-press", instances: [".batcom-list.batcom-layout--oneColumn.batcom-list--news-and-stories"] },
-      { name: "tabs-spotlight", instances: [".batcom-tabs.tabs.panelcontainer"] },
-      { name: "embed-video", instances: [".batcom-video"] }
+      { name: "hero-video", instances: [".cmp-hero-banner--videoBackground"] },
+      { name: "cards-drop", instances: [".article-list.cmp-article-list__redesign"] },
+      { name: "teaser-stage", instances: [".cmp-section--background-img", "section.cmp-gallery-parallax"] },
+      { name: "cards-product", instances: ["#carousel-exclude-pro.cmp-carousel", "#carousel-include-pro.cmp-carousel"] },
+      { name: "teaser-transaction", instances: [".teaser.cmp-teaser--background-image-height-teaser"] }
     ],
     sections: [
-      { id: "rc1c2c2", name: "Hero carousel", selector: [".batcom-container.batcom-container--full-page-width.batcom-container--noSpacing"], style: null, blocks: ["hero-carousel", "teaser-promo"], defaultContent: [] },
-      { id: "rc1c2c3", name: "Our transformation", selector: [".batcom-container.batcom-space--smallBottom.aem-GridColumn--laptop--none.aem-GridColumn--offset--laptop--0"], style: "light", blocks: ["cards-topic", "teaser-stage"], defaultContent: [] },
-      { id: "rc1c2c5", name: "Latest stories and features / Latest press releases", selector: [".batcom-columncontrol.columncontrol--home.columncontrol--large-height"], style: "dark", blocks: ["columns-newsroom", "cards-news", "cards-press"], defaultContent: [] },
-      { id: "rc1c2c6", name: "In the spotlight", selector: [".batcom-container.batcom-container--background-full-page-width.batcom-container--primary-light"], style: "grey", blocks: ["tabs-spotlight", "embed-video"], defaultContent: [] },
-      { id: "rc1c2c7", name: "Latest results, reports and research", selector: [".batcom-container.container.responsivegrid.batcom-space--largeBottom.aem-GridColumn--default--12:nth-of-type(7)"], style: "grey", blocks: ["cards-topic"], defaultContent: [] }
+      { id: "sec-hero-1", name: "Hero \u2014 Vapor Done Right", selector: [".cmp-hero-banner--videoBackground[id='627732359']"], style: "dark", blocks: ["hero-video"], defaultContent: [] },
+      { id: "sec-hero-2", name: "Hero #2", selector: [".cmp-hero-banner--videoBackground[id='1120845041']"], style: "dark", blocks: ["hero-video"], defaultContent: [] },
+      { id: "sec-find-your-flavor", name: "Find Your Flavor CTA", selector: [".button.cmp-button--vusePro-btn"], style: "light", blocks: [], defaultContent: [] },
+      { id: "sec-the-drop", name: "The Drop", selector: [".section.cmp-section--alignment-left.cmp-section--small-padding"], style: "light", blocks: ["cards-drop"], defaultContent: [] },
+      { id: "sec-all-access-rewards", name: "All Access Rewards banner", selector: [".cmp-section--background-img"], style: "accent", blocks: ["teaser-stage"], defaultContent: [] },
+      { id: "sec-americas-1-vape", name: "America's #1 Vape", selector: [".headline.title.cmp-title--color-blue-gradient.cmp-title--align-center.cmp-title--large"], style: "light", blocks: [], defaultContent: [] },
+      { id: "sec-simple-sleek-stylish", name: "Simple. Sleek. Stylish.", selector: ["section.cmp-gallery-parallax"], style: "dark", blocks: ["teaser-stage"], defaultContent: [] },
+      { id: "sec-product-carousels", name: "Product carousels", selector: ["#carousel-exclude-pro.cmp-carousel", "#carousel-include-pro.cmp-carousel"], style: "light", blocks: ["cards-product"], defaultContent: [] },
+      { id: "sec-find-a-store", name: "Find A Store CTA", selector: ["a[href='/store-locator.html']"], style: "light", blocks: [], defaultContent: [] },
+      { id: "sec-transaction-teasers", name: "Transaction teasers", selector: [".section.cmp-section--no-padding .teaser.cmp-teaser--background-image-height-teaser"], style: "light", blocks: ["teaser-transaction"], defaultContent: [] }
     ]
   };
   var transformers = [
